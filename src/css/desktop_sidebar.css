@@ -1,0 +1,31 @@
+.desktop-sidebar {
+  position: relative;
+  overflow-x: visible;
+  width: var(--sidebar-width);
+  transition: 0.3s width ease;
+  height: 100%;
+}
+.sidebar-toggle-icon {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 1.5rem;
+  right: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: white;
+  background-color: #00448c;
+  border-radius: 3rem;
+  z-index: 4;
+}
+.sidebar-shrink {
+  color: #ffffff00 !important;
+  width: 0 !important;
+}
+.desktop-sidebar-inner {
+  width: calc(100% - 0.6rem);
+  background-color: white;
+  box-shadow: 0.1rem 0 0 #dedede;
+  height: 100%;
+}

@@ -1,0 +1,25 @@
+.dashboard-transactions {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.5rem;
+}
+.dashboard-transactions__more {
+  display: flex;
+  align-self: flex-end;
+  width: max-content;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  color: #797979;
+  background-color: #f3f3f3;
+  font-weight: 500;
+  transition: 0.3s all ease;
+}
+.dashboard-transactions__more:hover {
+  color: #00448c;
+  background-color: #00448c2c;
+}
+.dashboard-transactions__more:focus {
+  color: #00448c92;
+  background-color: #0055af1c;
+}

@@ -1,0 +1,107 @@
+.dashboard-main {
+  display: flex;
+  flex-flow: column nowrap;
+  flex: 1;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding: 0 1rem;
+  margin-bottom: 2rem;
+}
+.dashboard-main__title {
+  font-weight: 700;
+  color: #9e9e9e;
+  text-transform: capitalize;
+}
+.dashboard-main__dashboard,
+.dashboard-main__courses,
+.dashboard-main__transactions {
+  display: flex;
+  flex-flow: column nowrap;
+  /* margin: 0 2rem; */
+  background-color: white;
+  margin: 0 0.75rem;
+}
+.dashboard-main-welcome {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  text-transform: capitalize;
+  font-weight: 600;
+  border-top: 0.1rem solid #ececec;
+  border-bottom: 0.1rem solid #ececec;
+}
+.dashboard-main-welcome span {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  gap: 0.2rem;
+}
+.dashboard-main__dashboard-info {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1.5rem;
+}
+
+/* Inactive account warn component styles - Start */
+.inactive-warn {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  margin-top: 0.5rem;
+  background-color: var(--mainpink);
+  border-radius: 0.5rem;
+}
+.inactive-warn-header {
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin: 0;
+}
+.inactive-warn-body {
+  font-size: 0.625rem;
+  margin: 0;
+}
+.inactive-warn-buttons {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 0.5rem;
+}
+/* Inactive account warn component styles - Stop */
+
+/*Dashboard template component styles - Start */
+.dashboard-temp {
+  display: flex;
+  flex-flow: column nowrap;
+  flex: 1;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  min-width: 9rem;
+  max-width: 12rem;
+  height: 6rem;
+  background-color: yellowgreen;
+  border-radius: 0.4rem;
+  text-transform: capitalize;
+  color: #404040;
+  font-weight: 600;
+  transition: 0.5s all ease;
+}
+.dashboard-temp:hover {
+  transform: perspective(1rem) translateZ(0.1rem);
+}
+.dashboard-temp__title {
+  position: relative;
+  top: 0.5rem;
+  margin: 0 1rem;
+}
+.dashboard-temp__body {
+  position: relative;
+  top: -0.5rem;
+  margin: 0 1rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+/*Dashboard template component styles - End */

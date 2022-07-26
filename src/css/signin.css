@@ -1,0 +1,84 @@
+.sign-in {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 20%;
+}
+.sign-in__body {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgba(222, 227, 239, 0.314);
+  height: 90vh;
+  color: #535353;
+  background: url(https://img.freepik.com/free-photo/female-hand-typing-keyboard-laptop_1150-15742.jpg?size=626&ext=jpg&ga=GA1.2.305344552.1642806554);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.sign-in__main {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 70%;
+  max-width: 27rem;
+  height: 60%;
+  gap: 3rem;
+  padding: 1rem 0.5rem;
+  border-radius: 1rem;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 1rem rgba(173, 173, 182, 0.322);
+}
+.sign-in__main-header {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  justify-content: center;
+  width: 80%;
+  height: 20%;
+  /* background-color: blueviolet; */
+}
+.sign-in__main-header p {
+  margin: 0.5rem 0 0 0;
+}
+.sign-in__sub-title {
+  font-size: 0.7rem;
+}
+.sign-in__title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.sign-in__main-body {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 50%;
+  gap: 0.6rem;
+  /* background-color: green; */
+}
+.small-blue {
+  font-weight: 700;
+  font-size: 0.7rem;
+  color: #2682fb;
+  width: max-content;
+}
+/* .styled-button {
+  display: flex;
+  justify-content: center;
+  width: 8rem;
+  border: none;
+  padding: 0.5rem 0;
+  border-radius: 2rem;
+  font-weight: 700;
+  color: white;
+  background-color: #2682fb;
+  box-shadow: 0 1rem 1rem rgba(194, 194, 194, 0.338);
+  transition: 0.2s all ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.styled-button:hover {
+  transform: perspective(1rem) translateZ(0.1rem);
+} */

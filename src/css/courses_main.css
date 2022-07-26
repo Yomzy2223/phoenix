@@ -1,0 +1,9 @@
+.courses-main {
+  display: flex;
+  flex-flow: row wrap;
+  flex: 1;
+  height: 9rem;
+  /* background-color: rgba(235, 237, 238, 0.589); */
+  border-radius: 1rem;
+  gap: 1.5rem;
+}

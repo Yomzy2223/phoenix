@@ -1,0 +1,34 @@
+.mobile-sidebar-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(103, 103, 103, 0.213);
+  overflow: hidden;
+  font-family: lato;
+  overflow: hidden;
+  z-index: 3;
+}
+.mobile-sidebar {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 0;
+  max-width: 100vw;
+  height: 100vh;
+  min-height: 25rem;
+  transition: 0.5s all ease;
+  z-index: 3;
+
+  overflow: hidden;
+}
+.sidebar-modal-on {
+  height: 100vh;
+  overflow: hidden;
+}
+
+@media screen and (min-width: 800px) {
+  .mobile-sidebar {
+    display: none;
+  }
+}

@@ -1,0 +1,30 @@
+.course-temp {
+  display: flex;
+  flex-flow: column nowrap;
+  flex: 1;
+  height: 11rem;
+  max-width: 15rem;
+  border-radius: 0.7rem;
+  transition: 0.5s all ease;
+}
+.course-temp img {
+  display: flex;
+  flex: 1;
+  min-width: 10rem;
+  height: 8rem;
+  border-radius: 0.7rem;
+  text-transform: capitalize;
+  color: #404040;
+  font-weight: 600;
+  transition: 0.5s all ease;
+  object-fit: contain;
+}
+.course-temp:hover {
+  transform: perspective(1rem) translateZ(0.1rem);
+}
+.course-temp-description {
+  text-align: center;
+  margin: 0;
+  font-size: 0.9rem;
+  color: #404040;
+}

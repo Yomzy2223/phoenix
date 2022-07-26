@@ -1,0 +1,226 @@
+.account-sidebar {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 1rem;
+  height: 100%;
+  min-height: 100vh;
+  width: 100%;
+  background-color: white;
+  z-index: 2;
+  transition: 0.5s width ease;
+  overflow: hidden;
+}
+.account-sidebar-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.account-sidebar__main {
+  display: flex;
+  flex: 1;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-between;
+  width: inherit;
+}
+.account-sidebar__body {
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  gap: 3%;
+  align-items: center;
+  height: 80%;
+  width: inherit;
+  /* background-color: bisque; */
+}
+.account-sidebar__search {
+  position: absolute;
+  top: 18%;
+  left: 5%;
+  color: #7c7c7a;
+}
+.search-shrink {
+  position: relative;
+  color: #7c7c7a;
+  padding: 0.5rem;
+  border-radius: 0.4rem;
+  background-color: #f5f5f5;
+}
+.account-sidebar__bottom {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  /* gap: 1rem; */
+  margin-bottom: 1rem;
+  /* background-color: blueviolet; */
+  height: 40%;
+  width: inherit;
+}
+
+/* Account holder component styles - start */
+.account-holder {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  margin: 0.5rem 0.8rem;
+  width: 100%;
+  border-radius: 0.5rem;
+}
+.account-holder-main {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: fls;
+  gap: 0.3rem;
+}
+.account-name-initials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  color: white;
+  background-color: #00448c;
+  min-width: 2.5rem;
+  min-height: 2.2rem;
+  border-radius: 0.5rem;
+}
+.account-holder-status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: green;
+  margin: 0;
+  font-size: 0.625rem;
+  color: #7c7c7a;
+  color: white;
+  padding: 0.2rem;
+  border-radius: 0.5rem;
+}
+.account-holder .account-inactive {
+  background-color: var(--mainred);
+}
+.account-holder-info {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  gap: 0.3rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  max-height: 4rem;
+  overflow: hidden;
+}
+.account-holder-info > * {
+  transition: 0.3s all ease;
+}
+.account-holder-name {
+  margin: 0;
+  font-weight: 700;
+  color: #222133;
+  font-size: 1rem;
+}
+.account-holder-username {
+  margin: -0.3rem 0 0 0;
+  color: rgba(0, 0, 0, 0.426);
+  font-size: 1rem;
+}
+.account-holder .user-follows {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 0.3rem;
+  font-size: 0.625rem;
+}
+.account-holder .user-follows p {
+  margin: 0;
+}
+.account-holder .user-follows span {
+  font-weight: 800;
+}
+/* Account holder component styles - end */
+
+/* Join now component styles - start */
+.sidebar-join-now {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.6rem;
+  padding: 1rem;
+  margin: 0.5rem 0 0 0;
+  border-radius: 0 3rem 3rem 3rem;
+  background-color: rgba(255, 255, 255, 0.174);
+  box-shadow: 0 0.5rem 1rem rgba(202, 202, 202, 0.375);
+  height: 1.5rem;
+  width: 10rem;
+  overflow: hidden;
+}
+.sidebar-join-now p {
+  color: var(--mainblue);
+  margin: 0;
+  transition: 0.3s all ease;
+  max-width: 7rem;
+  font-family: kurale;
+  animation: join-now 3s ease;
+}
+@keyframes join-now {
+  0% {
+    color: rgba(255, 255, 255, 0);
+  }
+  100% {
+    color: var(--mainblue);
+  }
+}
+.sidebar-join-now button {
+  filter: drop-shadow(0 0.5rem 0.5rem rgba(167, 167, 167, 0.219));
+  max-width: 4rem;
+}
+/* Join now component styles - end */
+
+/* Sidebar template component styles - start */
+.sidebar-temp-full {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-weight: 500;
+}
+
+.sidebar-temp-full:hover .sidebar-temp {
+  color: #00448c;
+}
+.sidebar-temp-full:focus {
+  border-left: 0.5rem solid #00448c;
+  background-color: rgba(141, 213, 255, 0.074);
+}
+.sidebar-temp-full:focus .sidebar-temp {
+  color: #00448c;
+}
+.sidebar-temp {
+  display: flex;
+  min-width: 80%;
+  gap: 5%;
+  padding: 0.3rem;
+  transition: 0.3s all ease;
+}
+.sidebar-temp span {
+  white-space: nowrap;
+  transition: 0.3s all ease;
+}
+.sidebar-temp-active {
+  border-left: 0.5rem solid #00448c;
+  background-color: rgba(141, 213, 255, 0.074);
+}
+#remove-link-style:hover {
+  border-left: 0.5rem solid #00448c;
+  background-color: #8dd5ff13;
+}
+#remove-link-style {
+  cursor: pointer;
+  color: var(--miniblack);
+  text-decoration: none;
+  width: 100%;
+  transition: 0.3s all ease;
+}
+/* Sidebar template component styles - end */

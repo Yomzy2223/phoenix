@@ -1,0 +1,32 @@
+.dashboard-mainpage {
+  /* display: flex; */
+  /* flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex: 1;
+  gap: 12rem; */
+  /* background-color: blueviolet; */
+}
+.dashboard-mainpage__body {
+  flex: 1;
+}
+
+.desktop-sidebar {
+  /* position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  z-index: 3; */
+}
+
+/* @media screen and (max-width: 800px) {
+  .desktop-sidebar {
+    display: none;
+  }
+} */
+@media screen and (min-width: 800px) {
+  .dashboard-page {
+    /* display: flex; */
+  }
+}

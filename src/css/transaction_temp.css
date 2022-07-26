@@ -1,0 +1,15 @@
+.dashboard__transaction-temp {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  background-color: #f3f3f3;
+  gap: 5%;
+  color: #797979;
+}
+.dashboard__transaction-temp__field {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  margin: 0;
+  padding: 0.5rem;
+}

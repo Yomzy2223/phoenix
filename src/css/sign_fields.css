@@ -1,0 +1,23 @@
+.sign-field {
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-end;
+  width: 80%;
+  /* background-color: brown; */
+}
+.sign-field input {
+  outline: none;
+  border: none;
+  border-bottom: 0.1rem solid #2682fb;
+  width: 100%;
+  padding: 0.6rem 0;
+}
+.sign-field input:placeholder-shown {
+  text-transform: capitalize;
+}
+.password-visibility {
+  position: absolute;
+  top: 0.3rem;
+  right: 3%;
+}

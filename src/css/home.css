@@ -1,0 +1,9 @@
+.home {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.home-body {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 1rem;
+}
