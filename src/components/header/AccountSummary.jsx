@@ -1,6 +1,5 @@
 import All_icons from "../../assets/All_Icons";
 import React, { useState } from "react";
-import "../../css/account_summary.css";
 import { Avatar } from "@mui/material";
 import { useSelector } from "react-redux";
 import store from "../redux/store";
@@ -15,9 +14,6 @@ const AccountSummary = () => {
     NotificationsIcon,
     ChatOutlinedIcon,
     ChatIcon,
-    ArrowDropDownIcon,
-    LogoutIcon,
-    ArrowDropUpIcon,
   } = All_icons;
 
   // Get clicked icon information from the store
@@ -70,22 +66,29 @@ const AccountSummary = () => {
           sx={{ backgroundColor: "var(--mainblue)", width: 30, height: 30 }}
         />
       </div>
-      <div className="account-summary-profile">
-        <div className="account-profile-icon" tabIndex={0}>
-          <Avatar sx={{ backgroundColor: "var(--mainblue)" }} />
-          <ArrowDropDownIcon style={{ position: "relative", left: "-.3rem" }} />
-        </div>
-        <div className="account-profile-info">
-          <ArrowDropUpIcon className="arrow-top" sx={{ fontSize: 70 }} />
-          <p tabIndex={0}>My Profile</p>
-          <p tabIndex={0}>Account Settings</p>
-          <button className="styled-button b3">
-            <LogoutIcon sx={{ fontSize: 17 }} /> Logout
-          </button>
-        </div>
-      </div>
+      <AccountProfile />
     </div>
   );
 };
 
 export default AccountSummary;
+
+export const AccountProfile = () => {
+  const { ArrowDropDownIcon, LogoutIcon, ArrowDropUpIcon } = All_icons;
+  return (
+    <div className="account-summary-profile">
+      <div className="account-profile-icon" tabIndex={0}>
+        <Avatar sx={{ backgroundColor: "var(--mainblue)" }} />
+        <ArrowDropDownIcon style={{ position: "relative", left: "-.3rem" }} />
+      </div>
+      <div className="account-profile-info">
+        <ArrowDropUpIcon className="arrow-top" sx={{ fontSize: 70 }} />
+        <p tabIndex={0}>My Profile</p>
+        <p tabIndex={0}>Account Settings</p>
+        <button className="styled-button b3">
+          <LogoutIcon sx={{ fontSize: 17 }} /> Logout
+        </button>
+      </div>
+    </div>
+  );
+};

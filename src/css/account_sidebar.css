@@ -205,12 +205,14 @@
   transition: 0.3s all ease;
 }
 .sidebar-temp span {
+  display: flex;
+  align-items: center;
   white-space: nowrap;
   transition: 0.3s all ease;
 }
 .sidebar-temp-active {
   border-left: 0.5rem solid #00448c;
-  background-color: rgba(141, 213, 255, 0.074);
+  background-color: #8dd5ff13;
 }
 #remove-link-style:hover {
   border-left: 0.5rem solid #00448c;

@@ -158,19 +158,9 @@
 .swiper-slide {
   max-width: 100% !important;
 }
-@media screen and (min-width: 47rem) {
-  /* .temp1-images {
-    max-width: calc(100vw - 35rem);
-  } */
-  /* .market-main {
-    max-width: calc(100% - 17rem);
-  } */
+@media screen and (min-width: 47.1rem) {
+  /* Regulate the width of market template 1 */
   .market-temp1 {
-    max-width: calc(100vw - var(--sidebar-width) - 1rem);
+    max-width: calc(100vw - var(--sidebar-width) - 3.1rem);
   }
 }
-/* @media screen and (max-width: 47rem) {
-  .temp1-images {
-    max-width: calc(100vw - 3.1rem);
-  }
-} */

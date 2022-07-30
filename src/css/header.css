@@ -75,7 +75,7 @@
 }
 .main-search-input input {
   flex: 1;
-  height: 2rem;
+  height: 2.2rem;
   border-radius: 1rem;
   padding: 0 1rem;
   outline: 0.1rem solid #71718357;
@@ -97,8 +97,9 @@
 }
 .mobile-search-icon {
   display: none;
+  flex: 1;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   color: var(--mainblue);
   height: 2.4rem;
   width: 3rem;
@@ -108,22 +109,29 @@
 }
 .search-sugg {
   position: absolute;
-  top: 2.9rem;
+  top: 3rem;
   right: 0;
   left: 0;
+  display: flex;
+  flex-flow: column;
   outline: 0.1rem solid #7575d36d;
   background-color: #ffffff;
-  padding: 0 1rem;
+  padding: 0 0.3rem;
   border-radius: 0 0 1rem 1rem;
-  /* box-shadow: 0 0.5rem 2rem #d1d1d1cc; */
   filter: drop-shadow(0 0.5rem 0.5rem #b3b3b371);
   z-index: 1;
+}
+.search-sugg-m {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
 }
 .search-sugg-top {
   height: max-content;
   max-height: 45vh;
   overflow: auto;
   margin: 0.2rem 0;
+  font-size: calc(0.8rem + 0.2vw);
 }
 .search-sugg-top::-webkit-scrollbar {
   width: 0.4rem;
@@ -134,21 +142,39 @@
   background-color: #93939361;
   border-radius: 1rem;
 }
+.search-sugg-top p {
+  padding: 0.5rem 0.7rem;
+  margin: 0;
+  cursor: pointer;
+}
+.search-sugg-top p:hover {
+  background-color: #f3f3f3;
+}
 .search-sugg-bottom {
   position: sticky;
   bottom: 0;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  padding: 1.5rem 0;
+  align-self: center;
+  width: 80%;
+  padding: 2.5rem 0 1.5rem 0;
   text-transform: capitalize;
-  /* background: linear-gradient(to bottom, #ffffff96, #ffffff 50%); */
+  background: linear-gradient(to bottom, #ffffff60, #ffffff 40%);
 }
 .search-sugg-bottom > div {
   display: flex;
   align-items: center;
-  filter: opacity(0.7);
+  justify-content: center;
   gap: 0.5rem;
+  width: 100%;
+  font-size: calc(0.7rem + 0.2vw);
+}
+.search-sugg-bottom p {
+  display: flex;
+  align-items: center;
+  height: 2rem;
+  margin: 0;
 }
 .gateway-buttons {
   display: flex;
@@ -232,25 +258,69 @@
   height: 2rem;
 }
 
-@media screen and (max-width: 38rem) {
+@media screen and (max-width: 47rem) {
   .profile-icon-mobile {
     display: block;
   }
+  .account-summary-users,
+  .account-summary-notifications,
+  .account-summary-chats,
   .account-summary-profile {
     display: none;
   }
 }
-@media screen and (max-width: 25rem) {
-  .profile-icon-mobile {
-    display: none;
-  }
-}
-@media screen and (max-width: 20rem) {
-  .account-summary {
-    display: none;
-  }
-}
 /* Account summary comoponent's styles -- end */
+
+/* Mobile search dialog component's styles -- start */
+.MuiDialogContent-root {
+  padding: 0 !important;
+}
+.search-dialog-content {
+  display: flex;
+  flex-flow: column;
+  height: 100vh;
+}
+.search-dialog-header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: stretch;
+  gap: 0.5rem;
+  height: 1.5rem;
+  padding: 0.8rem;
+  box-shadow: 0 0.1rem 0.3rem #b7b6b63f;
+  background-color: #ffffff;
+}
+.search-dialog-input {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+.search-dialog-input input {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+}
+.search-dialog-input input:focus {
+  outline: none;
+}
+.search-dialog-input input::first-letter {
+  text-transform: uppercase;
+}
+.search-dialog-body {
+  flex: 1;
+}
+.search-dialog-body .search-sugg-cont {
+  height: 100%;
+}
+.search-dialog-body .search-sugg-top {
+  max-height: 100%;
+  flex: 1;
+}
+/* Mobile search dialog component's styles -- end */
 
 @media screen and (max-width: 38rem) {
   .mobile-search-icon {
@@ -261,11 +331,6 @@
   }
   .header-main {
     margin: 0 3%;
-  }
-}
-@media screen and (max-width: 25rem) {
-  .mobile-search-icon {
-    display: none;
   }
 }
 @media screen and (max-width: 20rem) {
