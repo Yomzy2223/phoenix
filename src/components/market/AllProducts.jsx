@@ -1,10 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import {
-  Brands,
-  Categories,
-  Discount,
-  All_Products,
-} from "../../assets/Market";
 import store from "../redux/store";
 import { setNarrowSidebar, setSideBarShrink } from "../redux/userSlice";
 import "../../css/all_products.css";
@@ -22,7 +16,16 @@ const AllProducts = () => {
 
   const user_data = useSelector((store) => store.user_data);
   const { market } = user_data;
-  const { products, arrange_type } = market;
+  const {
+    products,
+    arrange_type,
+    brands,
+    categories,
+    discount,
+    searched_all,
+    searched_brand,
+    matched_brands,
+  } = market;
 
   // Remove sidebar toggle arrow
   useEffect(() => {
@@ -40,17 +43,18 @@ const AllProducts = () => {
     <div className="all-products">
       <div className="all-products-left">
         <div className="products-left-panel">
-          <ProductsCategories categories={Categories} />
+          <ProductsCategories categories={categories} />
           <ProductsLeftSection
             title="Brand"
             search="brands"
             input="checkbox"
-            info={Brands}
+            searching={searched_brand}
+            info={searched_brand ? matched_brands : brands}
           />
           <ProductsLeftSection
             title="Discount Percentage"
             input="radio"
-            info={Discount}
+            info={discount}
           />
         </div>
       </div>
@@ -62,13 +66,19 @@ const AllProducts = () => {
             arrange_type === "list" && "products-cont-list"
           }`}
         >
-          {products.map((product) => (
+          {/* {products.map((product) => (
             <Product
               key={product.id}
               product_info={product}
-              // arrange={arrange}
             />
-          ))}
+          ))} */}
+          {products
+            .filter((product) =>
+              product.item.toLowerCase().includes(searched_all.toLowerCase())
+            )
+            .map((product) => (
+              <Product key={product.id} product_info={product} />
+            ))}
         </div>
       </div>
     </div>
@@ -97,9 +107,8 @@ export const ProductsCategories = ({ categories }) => {
 // A new component
 // Products page left panel individual section component
 export const ProductsLeftSection = ({ info, title, search, input }) => {
-  const user_data = useSelector((store) => store.user_data);
-  const { market } = user_data;
-  const { searched_brand } = market;
+  const [searching, setsearching] = useState("");
+  const [match, setmatch] = useState([...info]);
 
   return (
     <div className="left-panel-section">
@@ -109,12 +118,16 @@ export const ProductsLeftSection = ({ info, title, search, input }) => {
           <InputSearch
             placeholder="Search Brands"
             search={search}
-            searched={searched_brand}
+            searching={searching}
+            setsearching={setsearching}
+            items={info}
+            match={match}
+            setmatch={setmatch}
           />
         </div>
       )}
       <div className="left-panel-checklist">
-        {info.map((list) => (
+        {match.map((list) => (
           <div key={list.id}>
             <input id={list.text} type={input} name={list} />
             <label htmlFor={list.text}>{list.text}</label>
@@ -133,12 +146,12 @@ export const RightPanelHeader = ({ setsortId, products_cont }) => {
   // Reference to the sort container
   const products_sort = useRef(null);
 
-  // Get total products number
-  const products_found = All_Products.length;
-
   const user_data = useSelector((store) => store.user_data);
   const { market } = user_data;
-  const { sortType, arrange_type } = market;
+  const { products, sortType, arrange_type } = market;
+
+  // Get total products number
+  const products_found = products.length;
 
   // Arrange products - list or grid
   const handleArrange = (type) => {

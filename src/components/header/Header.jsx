@@ -6,9 +6,9 @@ import {
   setSidebarRight,
   setSideBarShrink,
   setItemSearched,
-  setAllMatched,
   setBrandSearched,
-  setBrandsMatched,
+  setSelectedItem,
+  setSearchMatch,
 } from "../redux/userSlice";
 import store from "../redux/store";
 import { Link } from "react-router-dom";
@@ -27,12 +27,12 @@ import BubbleChartIcon from "@mui/icons-material/BubbleChart";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ClearIcon from "@mui/icons-material/Clear";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
-import { setAutoFreeze } from "immer";
 
 // Header component
 function Header() {
-  // const [loggedIn, setLoggedIn] = useState(true);
   const [listening, setListening] = useState(false);
+  const [searching, setsearching] = useState("");
+  const [match, setmatch] = useState([]);
 
   const handleMenuClick = () => {
     store.dispatch(setSideBarShrink(false));
@@ -57,8 +57,9 @@ function Header() {
   // Login status check and market information
   const user_data = useSelector((store) => store.user_data);
   const { loginstatus, market } = user_data;
-  const { searched_item } = market;
+  const { products, brands, categories } = market;
 
+  const all = [...products, ...brands, ...categories];
   return (
     <div id="header" className="header-main">
       <div className="header-main-content">
@@ -66,7 +67,12 @@ function Header() {
         <InputSearch
           placeholder="Search Products Brands and Categories..."
           search="all"
-          searched={searched_item}
+          desktop={true}
+          items={all}
+          searching={searching}
+          setsearching={setsearching}
+          match={searching?.length === 0 ? [] : match}
+          setmatch={setmatch}
         />
         {loginstatus ? (
           <AccountSummary />
@@ -140,23 +146,20 @@ export const useKeyPress = (targetKey) => {
 
 // __________________________________________________________________
 // Search input component for both desktop and mobile
-export const InputSearch = ({ placeholder, search, searched }) => {
+export const InputSearch = ({
+  desktop,
+  placeholder,
+  search,
+  searching,
+  setsearching,
+  items,
+  match,
+  setmatch,
+}) => {
   const [openSearch, setopenSearch] = useState(false);
   const [selectedIndex, setselectedIndex] = useState(-1);
   const [selectedItem, setselectedItem] = useState("");
   const [openSugg, setopenSugg] = useState(false);
-
-  // Get some information from market in store
-  const user_data = useSelector((store) => store.user_data);
-  const { market } = user_data;
-  const {
-    products,
-    brands,
-    categories,
-    matched_all,
-    matched_brands,
-    matched_brands_only,
-  } = market;
 
   const searchbox = useRef(null);
 
@@ -171,77 +174,64 @@ export const InputSearch = ({ placeholder, search, searched }) => {
       if (selectedIndex > 0) {
         setselectedIndex(selectedIndex - 1);
       } else {
-        setselectedIndex(matched_all.length - 1);
+        // setselectedIndex(matched_all.length - 1);
+        setselectedIndex(match.length - 1);
       }
     } else if (ArrowDown) {
-      if (selectedIndex < matched_all.length - 1) {
+      // if (selectedIndex < matched_all.length - 1) {
+      if (selectedIndex < match.length - 1) {
         setselectedIndex(selectedIndex + 1);
       } else {
         setselectedIndex(0);
       }
     } else if (Enter) {
-      handleSearch(selectedIndex);
+      updateInputValue(selectedIndex);
     }
   }, [ArrowUp, ArrowDown, Enter]);
 
   // Set the item selected with arrow key
   useEffect(() => {
-    var item = matched_all[selectedIndex]?.item;
-    var text = matched_all[selectedIndex]?.text;
+    var item = match[selectedIndex]?.item;
+    var text = match[selectedIndex]?.text;
     setselectedItem(item ? item : text);
   });
 
+  useEffect(() => {
+    setsearching(selectedItem);
+  }, [selectedItem]);
+
   // Input style when suggestion is on
   const style = {
-    borderRadius: matched_all.length > 0 && openSugg ? "1rem 1rem 0 0" : "",
-    boxShadow:
-      matched_all.length > 0 && openSugg ? "0 -0.5rem .5rem #f1f1f1aa" : "",
+    borderRadius: match.length > 0 && openSugg ? "1rem 1rem 0 0" : "",
+    boxShadow: match.length > 0 && openSugg ? "0 -0.5rem .5rem #f1f1f1aa" : "",
   };
 
   // Handle input value change
   const handleChange = (searching) => {
     setopenSugg(true);
-    // Search products, brands, categories, ....
-    if (search === "all") {
-      store.dispatch(setItemSearched(searching));
-      const matchedItems = products.filter((list) =>
-        list.item.toLowerCase().includes(searching.toLowerCase())
-      );
-      const matchedBrands = brands.filter((list) =>
-        list.text.toLowerCase().includes(searching.toLowerCase())
-      );
-      const matchedCategories = categories.filter((list) =>
-        list.text.toLowerCase().includes(searching.toLowerCase())
-      );
-      store.dispatch(
-        setAllMatched(
-          searching.length === 0
-            ? []
-            : [...matchedItems, ...matchedBrands, ...matchedCategories]
-        )
-      );
-      store.dispatch(
-        setBrandsMatched(searching.length === 0 ? [] : matchedBrands)
-      );
-    }
-    // Search brands only
-    if (search === "brands") {
-      store.dispatch(setBrandSearched(searching));
-      const matchedBrands = brands.filter((list) =>
-        list.text.toLowerCase().includes(searching.toLowerCase())
-      );
-      store.dispatch(
-        setBrandsMatched(searching.length === 0 ? [] : matchedBrands)
-      );
-    }
-    // Reset arrow selected item on every change in input value
+    setsearching(searching);
+
+    const matchedItems = items.filter((list) =>
+      list.item?.toLowerCase().includes(searching.toLowerCase())
+    );
+    const matchedTexts = items.filter((list) =>
+      list.text?.toLowerCase().includes(searching.toLowerCase())
+    );
+    const matched = [...matchedItems, ...matchedTexts];
+    setmatch(matched);
     setselectedIndex(-1);
   };
 
-  // The function to handle search
-  const handleSearch = (index) => {
+  // Update input value
+  const updateInputValue = (index) => {
     setopenSugg(false);
     setselectedIndex(index);
+    handleSearch();
+  };
+
+  // The function to handle search
+  const handleSearch = () => {
+    store.dispatch(setSearchMatch({ type: search, matched: match }));
   };
 
   // open search dialog for mobile screen
@@ -252,22 +242,45 @@ export const InputSearch = ({ placeholder, search, searched }) => {
   return (
     <>
       <div ref={searchbox} className="main-search-input">
-        <input
-          type="text"
-          placeholder={placeholder}
-          value={selectedItem ? selectedItem : searched}
-          style={style}
-          onChange={(e) => handleChange(e.target.value)}
+        {desktop && search === "all" && (
+          <input
+            type="text"
+            placeholder={placeholder}
+            value={selectedItem ? selectedItem : searching}
+            style={desktop && style}
+            onChange={(e) => handleChange(e.target.value)}
+          />
+        )}
+        {!desktop && search === "all" && (
+          <input
+            type="text"
+            placeholder={placeholder}
+            style={desktop && style}
+            onChange={(e) => handleChange(e.target.value)}
+          />
+        )}
+
+        {search !== "all" && (
+          <input
+            type="text"
+            placeholder={placeholder}
+            onChange={(e) => handleChange(e.target.value)}
+          />
+        )}
+        <SearchRoundedIcon
+          className="search-submit-button"
+          onClick={handleSearch}
         />
-        <SearchRoundedIcon className="search-submit-button" />
-        {matched_all.length > 0 && openSugg && (
+        {/* {matched_all.length > 0 && openSugg && ( */}
+        {match.length > 0 && openSugg && (
           <SearchSuggestions
             search={search}
-            matched_all={matched_all}
+            // matched_all={matched_all}
+            match={match}
             searchbox={searchbox}
             desktop={true}
             selectedIndex={selectedIndex}
-            handleSearch={handleSearch}
+            updateInputValue={updateInputValue}
           />
         )}
       </div>
@@ -289,11 +302,11 @@ export const InputSearch = ({ placeholder, search, searched }) => {
 // Search suggestion component
 export const SearchSuggestions = ({
   search,
-  matched_all,
+  match,
   searchbox,
   desktop,
   selectedIndex,
-  handleSearch,
+  updateInputValue,
 }) => {
   // useEffect(() => {
   //   desktop && window.addEventListener("click", (e) => closeSuggestions(e));
@@ -313,17 +326,18 @@ export const SearchSuggestions = ({
 
   return (
     <div className="search-sugg-cont">
-      {search === "all" && matched_all.length > 0 && (
+      {/* {console.log(matched_all)} */}
+      {search === "all" && match.length > 0 && (
         <div className={desktop ? "search-sugg" : "search-sugg-m"}>
           <div className="search-sugg-top">
-            {matched_all.map((product, index) => {
+            {match.map((product, index) => {
               return (
                 <div
                   key={product.id + product.item + product.text}
                   style={{
                     backgroundColor: index === selectedIndex ? "#e7e6e69d" : "",
                   }}
-                  onClick={() => handleSearch(index)}
+                  onClick={() => updateInputValue(index)}
                 >
                   {product.item && <p>{product.item}</p>}
                   {product.text && <p>{product.text}</p>}
@@ -359,41 +373,41 @@ export const MobileSearchDialog = ({ open, setOpen, search }) => {
     setOpen(false);
   };
 
-  const handleChange = (searching) => {
-    // Search products, brands, categories, ....
-    if (search === "all") {
-      store.dispatch(setItemSearched(searching));
-      const matchedItems = products.filter((list) =>
-        list.item.toLowerCase().includes(searching.toLowerCase())
-      );
-      const matchedBrands = brands.filter((list) =>
-        list.text.toLowerCase().includes(searching.toLowerCase())
-      );
-      const matchedCategories = categories.filter((list) =>
-        list.text.toLowerCase().includes(searching.toLowerCase())
-      );
-      store.dispatch(
-        setAllMatched(
-          searching.length === 0
-            ? []
-            : [...matchedItems, ...matchedBrands, ...matchedCategories]
-        )
-      );
-      store.dispatch(
-        setBrandsMatched(searching.length === 0 ? [] : matchedBrands)
-      );
-    }
-    // Search brands only
-    if (search === "brands") {
-      store.dispatch(setBrandSearched(searching));
-      const matchedBrands = brands.filter((list) =>
-        list.text.toLowerCase().includes(searching.toLowerCase())
-      );
-      store.dispatch(
-        setBrandsMatched(searching.length === 0 ? [] : matchedBrands)
-      );
-    }
-  };
+  // const handleChange = (searching) => {
+  //   // Search products, brands, categories, ....
+  //   if (search === "all") {
+  //     store.dispatch(setItemSearched(searching));
+  //     const matchedItems = products.filter((list) =>
+  //       list.item.toLowerCase().includes(searching.toLowerCase())
+  //     );
+  //     const matchedBrands = brands.filter((list) =>
+  //       list.text.toLowerCase().includes(searching.toLowerCase())
+  //     );
+  //     const matchedCategories = categories.filter((list) =>
+  //       list.text.toLowerCase().includes(searching.toLowerCase())
+  //     );
+  //     store.dispatch(
+  //       setAllMatched(
+  //         searching.length === 0
+  //           ? []
+  //           : [...matchedItems, ...matchedBrands, ...matchedCategories]
+  //       )
+  //     );
+  //     store.dispatch(
+  //       setBrandsMatched(searching.length === 0 ? [] : matchedBrands)
+  //     );
+  //   }
+  //   // Search brands only
+  //   if (search === "brands") {
+  //     store.dispatch(setBrandSearched(searching));
+  //     const matchedBrands = brands.filter((list) =>
+  //       list.text.toLowerCase().includes(searching.toLowerCase())
+  //     );
+  //     store.dispatch(
+  //       setBrandsMatched(searching.length === 0 ? [] : matchedBrands)
+  //     );
+  //   }
+  // };
 
   return (
     <Dialog
@@ -411,7 +425,7 @@ export const MobileSearchDialog = ({ open, setOpen, search }) => {
             <input
               type="text"
               placeholder="Search products, brands and categories"
-              onChange={(e) => handleChange(e.target.value)}
+              // onChange={(e) => handleChange(e.target.value)}
             />
           </div>
           <div>

@@ -1,5 +1,10 @@
 import { createSlice, current } from "@reduxjs/toolkit";
-import { All_Products, Brands, Categories } from "../../assets/Market";
+import {
+  All_Products,
+  Brands,
+  Categories,
+  Discount,
+} from "../../assets/Market";
 
 const DummyData = createSlice({
   name: "Comp state",
@@ -82,6 +87,7 @@ const UserData = createSlice({
     followers: 20,
     following: 14,
     loginstatus: true,
+    openSearch: false,
     cart: [],
     market: {
       sortType: "Popoularity",
@@ -90,11 +96,13 @@ const UserData = createSlice({
       products: All_Products,
       brands: Brands,
       categories: Categories,
-      searched_item: "",
-      searched_brand: "",
+      discount: Discount,
+      searched_all: "",
       matched_all: [],
+      selected_brand: "",
       matched_brands: [],
-      matched_brands_only: [],
+      selected_category: "",
+      selected_discount: "",
     },
   },
   reducers: {
@@ -197,17 +205,25 @@ const UserData = createSlice({
         state.market.products = Products_Sorted;
       }
     },
-    setItemSearched: (state, action) => {
-      state.market.searched_item = action.payload;
+    setAllSearched: (state, action) => {
+      state.market.searched_all = action.payload;
     },
-    setBrandSearched: (state, action) => {
-      state.market.searched_brand = action.payload;
+    setSelectedBrand: (state, action) => {
+      state.selected_brand = action.payload;
     },
-    setAllMatched: (state, action) => {
-      state.market.matched_all = action.payload;
+    setSelectedCategory: (state, action) => {
+      state.selected_category = action.payload;
     },
-    setBrandsMatched: (state, action) => {
-      state.market.matched_brands = action.payload;
+    setSelectedDiscount: (state, action) => {
+      state.selected_discount = action.payload;
+    },
+    setSearchMatch: (state, action) => {
+      const { type, matched } = action.payload;
+      if (type === "all") {
+        state.market.matched_all = matched;
+      } else if (type === "brands") {
+        state.market.matched_brands = matched;
+      }
     },
   },
 });
@@ -220,8 +236,9 @@ export const {
   decrementQuantity,
   handleSort,
   setArrange,
-  setItemSearched,
-  setBrandSearched,
-  setAllMatched,
-  setBrandsMatched,
+  setAllSearched,
+  setSelectedBrand,
+  setSelectedCategory,
+  setSelectedDiscount,
+  setSearchMatch,
 } = UserData.actions;

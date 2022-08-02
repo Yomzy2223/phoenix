@@ -19,7 +19,6 @@
   min-height: 25rem;
   transition: 0.5s all ease;
   z-index: 3;
-
   overflow: hidden;
 }
 .sidebar-modal-on {

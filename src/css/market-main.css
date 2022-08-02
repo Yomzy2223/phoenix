@@ -8,11 +8,14 @@
   gap: 2rem;
   font-family: nunito;
   padding: 1rem;
+  max-width: calc(100% - 2rem);
+  width: calc(100% - 2rem);
 }
 .market-temp1 {
   display: flex;
   flex-flow: column nowrap;
-  max-width: calc(100vw - 3.1rem);
+  /* max-width: calc(100vw - 3.1rem); */
+  max-width: calc(100vw - 2rem);
   transition: 0.3s all ease;
 }
 .market-temp1-info {
@@ -44,10 +47,8 @@
   display: flex;
   flex-flow: row nowrap;
   gap: 2.3rem;
-  /* max-width: calc(100vw - 20rem); */
   overflow-x: auto;
   overflow-y: visible;
-  /* margin: 0 1rem; */
 }
 .temp1-images::-webkit-scrollbar {
   height: 0.4rem;
