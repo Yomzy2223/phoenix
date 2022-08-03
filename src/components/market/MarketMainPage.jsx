@@ -131,12 +131,12 @@ export const MarketTemp1Title = ({ title, sub_title }) => {
   return (
     <div className="temp1-title">
       <p>
-        <Link to="/" className="rls" tabIndex={0}>
+        <Link to="/all-products" className="rls" tabIndex={0}>
           {title}
         </Link>
       </p>
       <div className="div-y" style={{ height: "calc(1.1rem + .2vw)" }} />
-      <Link to="/" className="rls" tabIndex={0}>
+      <Link to="/all-products" className="rls" tabIndex={0}>
         <p className="temp1-title-sub">
           {sub_title} <ArrowForwardIcon />
         </p>
