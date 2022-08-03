@@ -110,6 +110,7 @@
   font-size: calc(0.9rem + 0.2vw);
 }
 .rph-row2 {
+  position: relative;
   display: flex;
   flex-flow: row wrap;
   align-items: center;
@@ -124,9 +125,13 @@
   min-width: 30%;
 }
 .products-sort {
-  position: relative;
 }
-.products-sort > p {
+.products-sort > div {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.products-sort > div > p {
   display: flex;
   align-items: center;
   vertical-align: middle;

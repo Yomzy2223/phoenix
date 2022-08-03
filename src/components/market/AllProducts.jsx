@@ -169,15 +169,17 @@ export const RightPanelHeader = ({ setsortId, products_cont }) => {
           className="products-sort"
           onClick={() => setselectSort((selectSort) => !selectSort)}
         >
-          <p>
-            Sort by: {sortType} <ArrowDropDownIcon />{" "}
-          </p>
-          <SortTypes
-            setsortId={setsortId}
-            selectSort={selectSort}
-            setselectSort={setselectSort}
-            products_sort={products_sort}
-          />
+          <div>
+            <p>
+              Sort by: {sortType} <ArrowDropDownIcon />{" "}
+            </p>
+            <SortTypes
+              setsortId={setsortId}
+              selectSort={selectSort}
+              setselectSort={setselectSort}
+              products_sort={products_sort}
+            />
+          </div>
         </div>
         <div>
           <p>{`${products_found} products found`}</p>
