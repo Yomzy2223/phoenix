@@ -5,23 +5,34 @@ import All_Icons from "../../assets/All_Icons";
 import store from "../redux/store";
 import { setNavClicked } from "../redux/userSlice";
 
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
+import StoreRoundedIcon from "@mui/icons-material/StoreRounded";
+import StoreOutlinedIcon from "@mui/icons-material/StoreOutlined";
+import ListIcon from "@mui/icons-material/List";
+import SwapHorizRoundedIcon from "@mui/icons-material/SwapHorizRounded";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import InsertChartRoundedIcon from "@mui/icons-material/InsertChartRounded";
+
 const MobileNavbar = () => {
   const navClicked = useSelector((store) => store.dummy_data.nav_clicked);
 
   const navigate = useNavigate();
 
-  const {
-    HomeRoundedIcon,
-    HomeOutlinedIcon,
-    MenuBookIcon,
-    SignalCellular4BarRoundedIcon,
-    SignalCellular0BarOutlinedIcon,
-    ThumbUpIcon,
-    ThumbUpOutlinedIcon,
-    StoreRoundedIcon,
-    StoreOutlinedIcon,
-    ListIcon,
-  } = All_Icons;
+  // const {
+  //   HomeRoundedIcon,
+  //   HomeOutlinedIcon,
+  //   MenuBookIcon,
+  //   SignalCellular4BarRoundedIcon,
+  //   SignalCellular0BarOutlinedIcon,
+  //   ThumbUpIcon,
+  //   ThumbUpOutlinedIcon,
+  //   StoreRoundedIcon,
+  //   StoreOutlinedIcon,
+  //   ListIcon,
+  // } = All_Icons;
 
   const handleClick = (n) => {
     store.dispatch(setNavClicked(n));
@@ -33,38 +44,12 @@ const MobileNavbar = () => {
         {navClicked === "dashboard" ? (
           <div className="mobile-nb m-blue">
             <HomeRoundedIcon />
-            <span>Home</span>
+            <span>Dashboard</span>
           </div>
         ) : (
           <div className="mobile-nb">
             <HomeOutlinedIcon />
-            <span>Home</span>
-          </div>
-        )}
-      </div>
-      <div onClick={() => handleClick("courses")} tabIndex={0}>
-        {navClicked === "courses" ? (
-          <div className="mobile-nb m-blue">
-            <MenuBookIcon />
-            <span>Courses</span>
-          </div>
-        ) : (
-          <div className="mobile-nb">
-            <MenuBookIcon />
-            <span>Courses</span>
-          </div>
-        )}
-      </div>
-      <div onClick={() => handleClick("airtime")} tabIndex={0}>
-        {navClicked === "airtime" ? (
-          <div className="mobile-nb m-blue">
-            <SignalCellular4BarRoundedIcon />
-            <span>Airtime</span>
-          </div>
-        ) : (
-          <div className="mobile-nb ">
-            <SignalCellular0BarOutlinedIcon />
-            <span>Airtime</span>
+            <span>Dashboard</span>
           </div>
         )}
       </div>
@@ -81,6 +66,19 @@ const MobileNavbar = () => {
           </div>
         )}
       </div>
+      <div onClick={() => handleClick("swap")} tabIndex={0}>
+        {navClicked === "swap" ? (
+          <div className="mobile-nb m-blue">
+            <SwapHorizRoundedIcon />
+            <span>Swap</span>
+          </div>
+        ) : (
+          <div className="mobile-nb">
+            <SwapHorizRoundedIcon />
+            <span>Swap</span>
+          </div>
+        )}
+      </div>
       <div onClick={() => handleClick("market")} tabIndex={0}>
         {navClicked === "market" ? (
           <div className="mobile-nb m-blue">
@@ -91,6 +89,19 @@ const MobileNavbar = () => {
           <div className="mobile-nb">
             <StoreOutlinedIcon />
             <span>Market</span>
+          </div>
+        )}
+      </div>
+      <div onClick={() => handleClick("transactions")} tabIndex={0}>
+        {navClicked === "transactions" ? (
+          <div className="mobile-nb m-blue">
+            <InsertChartRoundedIcon />
+            <span>Transactions</span>
+          </div>
+        ) : (
+          <div className="mobile-nb ">
+            <BarChartIcon />
+            <span>Transactions</span>
           </div>
         )}
       </div>

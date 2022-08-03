@@ -95,7 +95,7 @@ export const ProductsCategories = ({ categories }) => {
       <p>Categories</p>
       <ul>
         {categories.map((category) => (
-          <Link to="/" key={category.id} className="rls">
+          <Link to="/all-products" key={category.id} className="rls">
             <li>{category.text}</li>
           </Link>
         ))}

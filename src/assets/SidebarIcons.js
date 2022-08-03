@@ -8,6 +8,7 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import All_Icons from "./All_Icons";
+import SwapHorizRoundedIcon from "@mui/icons-material/SwapHorizRounded";
 
 const {
   HomeRoundedIcon,
@@ -54,14 +55,8 @@ export const Account_Sidebar_info = [
     icon: <HomeRoundedIcon />,
     link: "/dashboard",
   },
-  { id: "courses", text: "Courses", icon: <MenuBookIcon />, link: "/courses" },
-  {
-    id: "airtime",
-    text: "Airtime",
-    icon: <SignalCellular4BarRoundedIcon />,
-    link: "/",
-  },
-  { id: "social", text: "Go Social", icon: <ThumbUpIcon />, link: "/" },
+  { id: "social", text: "Go Social", icon: <ThumbUpIcon />, link: "/social" },
+  { id: "swap", text: "Swap", icon: <SwapHorizRoundedIcon />, link: "/swap" },
   {
     id: "market",
     text: "Market Place",
@@ -74,7 +69,7 @@ export const Account_Sidebar_info = [
     icon: <BarChartIcon />,
     link: "/transactions",
   },
-  { id: 7, text: "Genealogy", icon: <MilitaryTechIcon />, link: "/genealogy" },
+  // { id: 7, text: "Genealogy", icon: <MilitaryTechIcon />, link: "/genealogy" },
 ];
 
 export {

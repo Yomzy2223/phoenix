@@ -214,7 +214,7 @@ export const MarketTemp1Scroll = ({ container, info, cover }) => {
     <div ref={container} className="temp1-images">
       {info.map((infodata) => (
         <div key={infodata.id} className="temp1-image-info">
-          <Link to="/" className="rls" tabIndex={0}>
+          <Link to="/all-products" className="rls" tabIndex={0}>
             <div
               className="temp1-image"
               style={{ borderRadius: infodata.new_price ? "1rem" : "100%" }}
@@ -227,7 +227,7 @@ export const MarketTemp1Scroll = ({ container, info, cover }) => {
               <img src={infodata.img_src} alt="" />
             </div>
           </Link>
-          <Link to="/" className="rls" tabIndex={0}>
+          <Link to="/all-products" className="rls" tabIndex={0}>
             <div className="temp1-info">
               {!cover && (
                 <p

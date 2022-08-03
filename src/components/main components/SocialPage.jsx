@@ -5,13 +5,13 @@ import AccountSideBar from "../sidebar/AccountSideBar";
 import MobileSideBar from "../sidebar/MobileSideBar";
 import "../../css/e_library.css";
 
-function ELibraryPage() {
+function SocialPage() {
   var sidebar_width = useSelector((state) => state.dummy_data.sidebar_width);
   var sidebar_right = useSelector((state) => state.dummy_data.sidebar_right);
 
   return (
     <div className="dashboard-page">
-      <div className="desktop-sidebar">
+      {/* <div className="desktop-sidebar">
         <AccountSideBar />
       </div>
       <MobileSideBar
@@ -23,9 +23,20 @@ function ELibraryPage() {
         <div className="e_library__coming-soon">
           <p>Coming Soon</p>
         </div>
+      </div> */}
+      <div
+        style={{
+          position: "absolute",
+          fontSize: "1.5rem",
+          color: "var(--mainblue)",
+          top: "40%",
+          left: "40%",
+        }}
+      >
+        Coming Soon...
       </div>
     </div>
   );
 }
 
-export default ELibraryPage;
+export default SocialPage;

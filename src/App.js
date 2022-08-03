@@ -2,9 +2,9 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
-import CoursesPage from "./components/main components/CoursesPage";
+import SwapPage from "./components/main components/SwapPage";
 import DashboardPage from "./components/main components/DashboardPage";
-import ELibraryPage from "./components/main components/ELibraryPage";
+import ELibraryPage from "./components/main components/SocialPage";
 import GenealogyPage from "./components/main components/GenealogyPage";
 import MobileNavbar from "./components/main components/MobileNavbar";
 import SignInPage from "./components/main components/SignInPage";
@@ -14,6 +14,8 @@ import AllProducts from "./components/market/AllProducts";
 import MarketMainPage from "./components/market/MarketMainPage";
 import AccountSideBar from "./components/sidebar/AccountSideBar";
 import { useSelector } from "react-redux/es/exports";
+import SocialPage from "./components/main components/SocialPage";
+import MorePage from "./components/main components/MorePage";
 
 function App() {
   const shrink = useSelector((store) => store.dummy_data.sidebar_is_shrink);
@@ -38,9 +40,10 @@ function App() {
               <Route path="/sign_in" element={<SignInPage />} />
               <Route path="/sign_up" element={<SignUpPage />} />
               <Route path="/transactions" element={<TransactionPage />}></Route>
-              <Route path="/courses" element={<CoursesPage />}></Route>
-              <Route path="/genealogy" element={<GenealogyPage />}></Route>
+              <Route path="/swap" element={<SwapPage />}></Route>
+              <Route path="/social" element={<SocialPage />}></Route>
               <Route path="/e_library" element={<ELibraryPage />}></Route>
+              <Route path="/more" element={<MorePage />}></Route>
             </Routes>
           </div>
         </div>

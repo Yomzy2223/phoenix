@@ -285,7 +285,7 @@ export var All_Products = [
     item: "Samsung A32",
     info: "(128GB, 6GB RAM)",
     img_src:
-      "https://img.freepik.com/premium-vector/high-detail-new-phone-perspective-angle-view-vector-drawing-isolated-white-background_34944-162.jpg?size=338&ext=jpg",
+      "https://i.ebayimg.com/thumbs/images/g/I84AAOSwq1lePUpr/s-l225.webp",
     new_price: 34,
     old_price: 66,
     ratings: [5, 3],
@@ -301,7 +301,7 @@ export var All_Products = [
     item: "Samsung A32",
     info: "(128GB, 6GB RAM)",
     img_src:
-      "https://img.freepik.com/premium-vector/high-detail-new-phone-perspective-angle-view-vector-drawing-isolated-white-background_34944-162.jpg?size=338&ext=jpg",
+      "https://i.ebayimg.com/thumbs/images/g/ZvoAAOSwePpePUot/s-l225.webp",
     new_price: 44,
     old_price: 82,
     ratings: [5, 3, 2],
@@ -315,7 +315,7 @@ export var All_Products = [
     item: "Samsung A32",
     info: "(128GB, 6GB RAM)",
     img_src:
-      "https://img.freepik.com/premium-vector/high-detail-new-phone-perspective-angle-view-vector-drawing-isolated-white-background_34944-162.jpg?size=338&ext=jpg",
+      "https://i.ebayimg.com/thumbs/images/g/bzgAAOSwM4hePUo1/s-l225.webp",
     new_price: 34,
     old_price: 55,
     ratings: [5, 3, 4, 2],
@@ -329,7 +329,7 @@ export var All_Products = [
     item: "Samsung A32",
     info: "(128GB, 6GB RAM)",
     img_src:
-      "https://img.freepik.com/premium-vector/high-detail-new-phone-perspective-angle-view-vector-drawing-isolated-white-background_34944-162.jpg?size=338&ext=jpg",
+      "https://i.ebayimg.com/thumbs/images/g/jk0AAOSwoeVeQR1j/s-l225.webp",
     new_price: 32,
     old_price: 65,
     ratings: [5, 3, 5],
@@ -343,7 +343,7 @@ export var All_Products = [
     item: "Samsung A32",
     info: "(128GB, 6GB RAM)",
     img_src:
-      "https://img.freepik.com/premium-vector/high-detail-new-phone-perspective-angle-view-vector-drawing-isolated-white-background_34944-162.jpg?size=338&ext=jpg",
+      "https://i.ebayimg.com/thumbs/images/g/KeAAAOSwwD1eQR04/s-l225.webp",
     new_price: 54,
     old_price: 67,
     ratings: [5, 3],
@@ -357,7 +357,7 @@ export var All_Products = [
     item: "Samsung A32",
     info: "(128GB, 6GB RAM)",
     img_src:
-      "https://img.freepik.com/premium-vector/high-detail-new-phone-perspective-angle-view-vector-drawing-isolated-white-background_34944-162.jpg?size=338&ext=jpg",
+      "https://i.ebayimg.com/thumbs/images/g/-a8AAOSwRPZht6MJ/s-l225.webp",
     new_price: 10,
     old_price: 33,
     ratings: [5, 3],
@@ -371,7 +371,7 @@ export var All_Products = [
     item: "Samsung A75",
     info: "(128GB, 6GB RAM)",
     img_src:
-      "https://img.freepik.com/premium-vector/high-detail-new-phone-perspective-angle-view-vector-drawing-isolated-white-background_34944-162.jpg?size=338&ext=jpg",
+      "https://i.ebayimg.com/thumbs/images/g/--0AAOSwnLhi3OE3/s-l1600.jpg",
     new_price: 26,
     old_price: 38,
     ratings: [5, 3, 1, 1],
@@ -387,7 +387,7 @@ export var All_Products = [
     item: "Itel S3",
     info: "(128GB, 6GB RAM)",
     img_src:
-      "https://img.freepik.com/premium-vector/high-detail-new-phone-perspective-angle-view-vector-drawing-isolated-white-background_34944-162.jpg?size=338&ext=jpg",
+      "https://i.ebayimg.com/thumbs/images/g/2goAAOSws-xeQSLb/s-l225.webp",
     new_price: 19,
     old_price: 30,
     ratings: [5, 3],
@@ -401,7 +401,7 @@ export var All_Products = [
     item: "iPhone 12",
     info: "(128GB, 6GB RAM)",
     img_src:
-      "https://img.freepik.com/premium-vector/high-detail-new-phone-perspective-angle-view-vector-drawing-isolated-white-background_34944-162.jpg?size=338&ext=jpg",
+      "https://i.ebayimg.com/thumbs/images/g/-8gAAOSwhiJeQSLm/s-l225.webp",
     new_price: 55,
     old_price: 85,
     ratings: [5, 5, 5],
@@ -415,7 +415,7 @@ export var All_Products = [
     item: "Samsung A32",
     info: "(128GB, 6GB RAM)",
     img_src:
-      "https://img.freepik.com/premium-vector/high-detail-new-phone-perspective-angle-view-vector-drawing-isolated-white-background_34944-162.jpg?size=338&ext=jpg",
+      "https://i.ebayimg.com/thumbs/images/g/JCQAAOSwEY9eQSLq/s-l225.webp",
     new_price: 54,
     old_price: 87,
     ratings: [5, 3, 3],
@@ -428,8 +428,7 @@ export var All_Products = [
     id: 11,
     item: "Infinix Hot 8",
     info: "(128GB, 6GB RAM)",
-    img_src:
-      "https://img.freepik.com/premium-vector/high-detail-new-phone-perspective-angle-view-vector-drawing-isolated-white-background_34944-162.jpg?size=338&ext=jpg",
+    img_src: "https://i.ebayimg.com/images/g/3hgAAOSwMc9iPrP7/s-l500.jpg",
     new_price: 45,
     old_price: 54,
     ratings: [5, 3, 1, 1],
@@ -442,8 +441,7 @@ export var All_Products = [
     id: 12,
     item: "Tecno K7",
     info: "(128GB, 6GB RAM)",
-    img_src:
-      "https://img.freepik.com/premium-vector/high-detail-new-phone-perspective-angle-view-vector-drawing-isolated-white-background_34944-162.jpg?size=338&ext=jpg",
+    img_src: "https://i.ebayimg.com/images/g/NmsAAOSw5S5fDry5/s-l640.jpg",
     new_price: 64,
     old_price: 76,
     ratings: [1, 2, 2, 4],

@@ -10,7 +10,7 @@ function TransactionPage() {
 
   return (
     <div className="dashboard-page">
-      <div className="desktop-sidebar">
+      {/* <div className="desktop-sidebar">
         <AccountSideBar />
       </div>
       <MobileSideBar
@@ -19,6 +19,17 @@ function TransactionPage() {
       />
       <div className="dashboard-mainpage">
         <Header showlist={false} />
+      </div> */}
+      <div
+        style={{
+          position: "absolute",
+          fontSize: "1.5rem",
+          color: "var(--mainblue)",
+          top: "40%",
+          left: "40%",
+        }}
+      >
+        Coming Soon...
       </div>
     </div>
   );
