@@ -272,7 +272,7 @@
 /* Account summary comoponent's styles -- end */
 
 /* Mobile search dialog component's styles -- start */
-.MuiDialogContent-root {
+/* .MuiDialogContent-root {
   padding: 0 !important;
 }
 .search-dialog-content {
@@ -319,7 +319,7 @@
 .search-dialog-body .search-sugg-top {
   max-height: 100%;
   flex: 1;
-}
+} */
 /* Mobile search dialog component's styles -- end */
 
 @media screen and (max-width: 38rem) {

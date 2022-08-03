@@ -45,7 +45,7 @@
   margin: 0 0 0.5rem 0;
 }
 .left-panel-checklist {
-  max-height: 11rem;
+  height: 11rem;
   overflow: auto;
 }
 .left-panel-checklist::-webkit-scrollbar {

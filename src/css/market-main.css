@@ -109,10 +109,33 @@
   margin: 0.5rem 0 1.5rem 0.5rem;
 }
 .temp1-image {
-  background-color: rgb(140, 226, 233);
+  position: relative;
+  display: flex;
+  align-items: center;
   max-width: max-content;
-  border-radius: 100%;
+  background-color: #ffffff;
+  padding: 0.3rem;
   overflow: hidden;
+}
+.temp1-image-cover {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  background-color: #8f8f8f82;
+  font-weight: 700;
+  filter: drop-shadow(0 0 1rem #b8b8b84c);
+}
+.temp1-image-cover p {
+  text-shadow: 0 0 2rem black;
+  font-family: kurale;
+  color: #ffffff;
+  letter-spacing: 0.2rem;
 }
 .temp1-image:hover {
   outline: 0.1rem solid var(--mainblue);
@@ -121,7 +144,8 @@
   width: calc(4rem + 3vw);
   height: calc(4rem + 3vw);
   object-fit: contain;
-  border-radius: 100%;
+  border-radius: inherit;
+  /* filter: drop-shadow(0 0 0.5rem #6a6a6a); */
 }
 .temp1-info {
   display: flex;

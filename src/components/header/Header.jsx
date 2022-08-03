@@ -9,6 +9,7 @@ import {
   setBrandSearched,
   setSelectedItem,
   setSearchMatch,
+  setMobileSearch,
 } from "../redux/userSlice";
 import store from "../redux/store";
 import { Link } from "react-router-dom";
@@ -163,6 +164,10 @@ export const InputSearch = ({
 
   const searchbox = useRef(null);
 
+  const user_data = useSelector((store) => store.user_data);
+  const { market } = user_data;
+  const { mobile_search } = market;
+
   // determined the pressed key using useKeyPress custom hook
   const ArrowUp = useKeyPress("ArrowUp");
   const ArrowDown = useKeyPress("ArrowDown");
@@ -236,7 +241,8 @@ export const InputSearch = ({
 
   // open search dialog for mobile screen
   const openSearchDialog = () => {
-    setopenSearch(true);
+    store.dispatch(setMobileSearch(true));
+    // setopenSearch(true);
   };
 
   return (
@@ -255,7 +261,6 @@ export const InputSearch = ({
           <input
             type="text"
             placeholder={placeholder}
-            style={desktop && style}
             onChange={(e) => handleChange(e.target.value)}
           />
         )}
@@ -284,13 +289,15 @@ export const InputSearch = ({
           />
         )}
       </div>
-      <div className="mobile-search-icon">
-        <SearchRoundedIcon onClick={openSearchDialog} />
-      </div>
-      {openSearch && (
+      {!mobile_search && (
+        <div className="mobile-search-icon">
+          <SearchRoundedIcon onClick={openSearchDialog} />
+        </div>
+      )}
+      {mobile_search && (
         <MobileSearchDialog
-          open={openSearch}
-          setOpen={setopenSearch}
+          open={mobile_search}
+          setOpen={openSearchDialog}
           search="all"
         />
       )}
@@ -361,14 +368,22 @@ export const SearchSuggestions = ({
 // ____________________________________________________________
 // Search modal component for mobile view
 export const MobileSearchDialog = ({ open, setOpen, search }) => {
+  const [searching, setsearching] = useState("");
+  const [match, setmatch] = useState([]);
+
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   // Get some information from market in store
+  // const user_data = useSelector((store) => store.user_data);
+  // const { market } = user_data;
+  // const { matched_all, products, brands, categories } = market;
+
   const user_data = useSelector((store) => store.user_data);
   const { market } = user_data;
-  const { matched_all, products, brands, categories } = market;
+  const { products, brands, categories } = market;
 
+  const all = [...products, ...brands, ...categories];
   const handleClose = () => {
     setOpen(false);
   };
@@ -417,7 +432,7 @@ export const MobileSearchDialog = ({ open, setOpen, search }) => {
       aria-labelledby="responsive-dialog-title"
     >
       <DialogContent className="search-dialog-content">
-        <div className="search-dialog-header">
+        {/* <div className="search-dialog-header">
           <div onClick={handleClose}>
             <ArrowBackIcon />
           </div>
@@ -438,7 +453,16 @@ export const MobileSearchDialog = ({ open, setOpen, search }) => {
         </div>
         <div className="search-dialog-body">
           <SearchSuggestions search={search} matched_all={matched_all} />
-        </div>
+        </div> */}
+        <InputSearch
+          placeholder="Search Products Brands and Categories..."
+          search="all"
+          searching={searching}
+          setsearching={setsearching}
+          items={all}
+          match={match}
+          setmatch={setmatch}
+        />
       </DialogContent>
     </Dialog>
   );

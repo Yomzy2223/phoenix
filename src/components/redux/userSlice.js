@@ -93,6 +93,7 @@ const UserData = createSlice({
       sortType: "Popoularity",
       sortId: 1,
       arrange_type: "",
+      mobile_search: false,
       products: All_Products,
       brands: Brands,
       categories: Categories,
@@ -225,6 +226,9 @@ const UserData = createSlice({
         state.market.matched_brands = matched;
       }
     },
+    setMobileSearch: (state, action) => {
+      state.market.open_search = action.payload;
+    },
   },
 });
 
@@ -241,4 +245,5 @@ export const {
   setSelectedCategory,
   setSelectedDiscount,
   setSearchMatch,
+  setMobileSearch,
 } = UserData.actions;

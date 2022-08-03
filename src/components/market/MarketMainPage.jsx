@@ -30,6 +30,7 @@ const MarketMainPage = () => {
         title="Explore Popular Brands"
         sub_title="See all"
         info={Brands}
+        cover={Brands}
       />
       <MarketTemp1 title={Deals.title} sub_title="See all" info={Deals.info} />{" "}
     </div>
@@ -83,7 +84,7 @@ export const MarketAdvert = ({ adInfo }) => {
 
 // Market template component used in the market main page
 //-----------------------------------------------------------------------
-export const MarketTemp1 = ({ title, sub_title, info }) => {
+export const MarketTemp1 = ({ title, sub_title, info, cover }) => {
   const [prevDisabled, setprevDisabled] = useState(false);
   const [nextDisabled, setnextDisabled] = useState(false);
   const [showNav, setshowNav] = useState(false);
@@ -114,7 +115,7 @@ export const MarketTemp1 = ({ title, sub_title, info }) => {
           <MarketTemp1Nav container={container} navData={navData} prev={true} />
         )}
         {/* All images section */}
-        <MarketTemp1Scroll info={info} container={container} />
+        <MarketTemp1Scroll info={info} container={container} cover={cover} />
         {/* Next nav button */}
         {showNav && (
           <MarketTemp1Nav container={container} navData={navData} next={true} />
@@ -208,7 +209,7 @@ export const MarketTemp1Nav = ({ container, prev, next, navData }) => {
 
 //X-axis Scrollable container Component
 //------------------------------------------------------------------------------------
-export const MarketTemp1Scroll = ({ container, info }) => {
+export const MarketTemp1Scroll = ({ container, info, cover }) => {
   return (
     <div ref={container} className="temp1-images">
       {info.map((infodata) => (
@@ -216,16 +217,25 @@ export const MarketTemp1Scroll = ({ container, info }) => {
           <Link to="/" className="rls" tabIndex={0}>
             <div
               className="temp1-image"
-              style={{ borderRadius: infodata.new_price ? "1rem" : "" }}
+              style={{ borderRadius: infodata.new_price ? "1rem" : "100%" }}
             >
+              {cover && (
+                <div className="temp1-image-cover">
+                  <p>{infodata.text}</p>
+                </div>
+              )}
               <img src={infodata.img_src} alt="" />
             </div>
           </Link>
           <Link to="/" className="rls" tabIndex={0}>
             <div className="temp1-info">
-              <p style={{ alignSelf: infodata.new_price ? "flex-start" : "" }}>
-                {infodata.text}
-              </p>
+              {!cover && (
+                <p
+                  style={{ alignSelf: infodata.new_price ? "flex-start" : "" }}
+                >
+                  {infodata.text}
+                </p>
+              )}
               {infodata.new_price ? (
                 <div className="temp1-info-pricing">
                   <p>{`$${infodata.new_price}`}</p>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../../css/product.css";
 import Rating from "react-rating";
 import StarIcon from "@mui/icons-material/Star";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
+import StarBorderIcon9 from "@mui/icons-material/StarBorder";
 import { useEffect } from "react";
 import store from "../redux/store";
 import {

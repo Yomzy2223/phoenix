@@ -2,73 +2,73 @@ export const Categories = [
   {
     id: 1,
     img_src:
-      "https://cdn.pixabay.com/photo/2015/12/02/20/45/shopping-1073449_960_720.png",
+      "https://i.ebayimg.com/thumbs/images/g/T5sAAOSwFZNd-KCX/s-l225.webp",
     text: "Supermarket",
   },
   {
     id: 2,
     img_src:
-      "https://cdn.pixabay.com/photo/2015/12/02/20/45/shopping-1073449_960_720.png",
+      "https://i.ebayimg.com/thumbs/images/g/de0AAOSw6INd-KBC/s-l225.webp",
     text: "Health & Beauty",
   },
   {
     id: 3,
     img_src:
-      "https://cdn.pixabay.com/photo/2015/12/02/20/45/shopping-1073449_960_720.png",
+      "https://i.ebayimg.com/thumbs/images/g/wNEAAOSwLhFi4YGz/s-l225.webp",
     text: "Home & Office",
   },
   {
     id: 4,
     img_src:
-      "https://cdn.pixabay.com/photo/2015/12/02/20/45/shopping-1073449_960_720.png",
+      "https://i.ebayimg.com/thumbs/images/g/s2AAAOSwqzFePUpv/s-l225.webp",
     text: "Phones & Tablets",
   },
   {
     id: 5,
     img_src:
-      "https://cdn.pixabay.com/photo/2015/12/02/20/45/shopping-1073449_960_720.png",
+      "https://i.ebayimg.com/thumbs/images/g/31EAAOSw-BJfsl4m/s-l225.webp",
     text: "Computing",
   },
   {
     id: 6,
     img_src:
-      "https://cdn.pixabay.com/photo/2015/12/02/20/45/shopping-1073449_960_720.png",
+      "https://i.ebayimg.com/thumbs/images/g/05QAAOSwVTdi59rm/s-l225.webp",
     text: "Electronics",
   },
   {
     id: 7,
     img_src:
-      "https://cdn.pixabay.com/photo/2015/12/02/20/45/shopping-1073449_960_720.png",
+      "https://i.ebayimg.com/thumbs/images/g/8MoAAOSwT9Nejdr6/s-l225.webp",
     text: "Fashion",
   },
   {
     id: 8,
     img_src:
-      "https://cdn.pixabay.com/photo/2015/12/02/20/45/shopping-1073449_960_720.png",
+      "https://i.ebayimg.com/thumbs/images/g/16UAAOSwJx1eWG3m/s-l225.webp",
     text: "Baby Products",
   },
   {
     id: 9,
     img_src:
-      "https://cdn.pixabay.com/photo/2015/12/02/20/45/shopping-1073449_960_720.png",
+      "https://i.ebayimg.com/thumbs/images/g/-d4AAOSwsNxi40GT/s-l225.webp",
     text: "Gaming",
   },
   {
     id: 10,
     img_src:
-      "https://cdn.pixabay.com/photo/2015/12/02/20/45/shopping-1073449_960_720.png",
+      "https://i.ebayimg.com/thumbs/images/g/2doAAOSwI~piJkFd/s-l225.webp",
     text: "Sporting Goods",
   },
   {
     id: 11,
     img_src:
-      "https://cdn.pixabay.com/photo/2015/12/02/20/45/shopping-1073449_960_720.png",
+      "https://img.freepik.com/free-photo/yellow-sport-car-with-black-autotuning-road_114579-5051.jpg?size=626&ext=jpg&ga=GA1.2.987073728.1659530886",
     text: "Automobile",
   },
   {
     id: 12,
     img_src:
-      "https://cdn.pixabay.com/photo/2015/12/02/20/45/shopping-1073449_960_720.png",
+      "https://i.ebayimg.com/thumbs/images/g/9sUAAOSwb7BfUOsh/s-l225.webp",
     text: "Other categories",
   },
 ];
@@ -76,32 +76,37 @@ export const Categories = [
 export const Brands = [
   {
     id: 1,
-    img_src: "",
+    img_src:
+      "https://i.ebayimg.com/thumbs/images/g/bzgAAOSwM4hePUo1/s-l225.webp",
     text: "Apple",
   },
   {
     id: 2,
-    img_src: "",
+    img_src:
+      "https://i.ebayimg.com/thumbs/images/g/z4sAAOSwCDxeQR1S/s-l225.webp",
     text: "Samsung",
   },
   {
     id: 3,
-    img_src: "",
+    img_src: "https://i.ebayimg.com/images/g/H2YAAOSwE1dgjq-3/s-l300.jpg",
     text: "Sony",
   },
   {
     id: 4,
-    img_src: "",
+    img_src:
+      "https://i.ebayimg.com/thumbs/images/g/xQ4AAOSwSOditBrM/s-l225.webp",
     text: "Ugreen",
   },
   {
     id: 5,
-    img_src: "",
+    img_src:
+      "https://i.ebayimg.com/thumbs/images/g/2goAAOSws-xeQSLb/s-l225.webp",
     text: "Xiaomi",
   },
   {
     id: 6,
-    img_src: "",
+    img_src:
+      "https://i.ebayimg.com/thumbs/images/g/Rn8AAOSw4W9ih~rt/s-l225.webp",
     text: "Nike",
   },
 ];
@@ -134,56 +139,64 @@ export const Deals = {
   info: [
     {
       id: 1,
-      img_src: "",
-      text: "iPod",
+      img_src:
+        "https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/00/7926721/1.jpg?5385",
+      text: "Infinix Smart 6",
       new_price: 234,
       old_price: 503,
       off: 23,
     },
     {
       id: 2,
-      img_src: "",
-      text: "iPod",
+      img_src:
+        "https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/15/7091321/1.jpg?7491",
+      text: "Tecno K7",
       new_price: 234,
       old_price: 503,
       off: 13,
     },
     {
       id: 3,
-      img_src: "",
+      img_src:
+        "https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/53/718375/1.jpg?0866",
       text: "iPod",
+      text: "Smart Watch",
       new_price: 234,
       old_price: 503,
       off: 35,
     },
     {
       id: 4,
-      img_src: "",
-      text: "iPod",
+      img_src:
+        "https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/65/233407/2.jpg?0184",
+      text: "Hair Clipper",
       new_price: 234,
       old_price: 503,
       off: 25,
     },
     {
       id: 5,
-      img_src: "",
-      text: "iPod",
+      img_src:
+        "https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/80/306344/1.jpg?4463",
+      text: "Skyrun",
       new_price: 234,
       old_price: 503,
       off: 50,
     },
     {
       id: 6,
-      img_src: "",
-      text: "iPod",
+      img_src:
+        "https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/14/5877411/1.jpg?1130",
+      text: "Infinix",
       new_price: 234,
       old_price: 503,
       off: 35,
     },
     {
       id: 7,
-      img_src: "",
-      text: "iPod",
+      img_src:
+        "https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/39/681177/1.jpg?3281",
+      text: "Volcano Sharkbottom",
       new_price: 234,
       old_price: 503,
       off: 10,
