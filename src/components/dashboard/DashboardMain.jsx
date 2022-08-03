@@ -41,7 +41,7 @@ function DashboardMain() {
         </div>
       </div>
       <div className="dashboard-main__courses">
-        <p className="dashboard-main__title">my courses</p>
+        <p className="dashboard-main__title">recently viewed products</p>
         <CoursesMain />
       </div>
       <div className="dashboard-main__transactions">
