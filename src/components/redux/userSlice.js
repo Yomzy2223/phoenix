@@ -100,7 +100,7 @@ const UserData = createSlice({
       discount: Discount,
       searched_all: "",
       matched_all: [],
-      selected_brand: "",
+      selected_brands: [],
       matched_brands: [],
       selected_category: "",
       selected_discount: "",
@@ -209,8 +209,8 @@ const UserData = createSlice({
     setAllSearched: (state, action) => {
       state.market.searched_all = action.payload;
     },
-    setSelectedBrand: (state, action) => {
-      state.selected_brand = action.payload;
+    setSelectedBrands: (state, action) => {
+      state.market.selected_brands = action.payload;
     },
     setSelectedCategory: (state, action) => {
       state.selected_category = action.payload;
@@ -241,7 +241,7 @@ export const {
   handleSort,
   setArrange,
   setAllSearched,
-  setSelectedBrand,
+  setSelectedBrands,
   setSelectedCategory,
   setSelectedDiscount,
   setSearchMatch,

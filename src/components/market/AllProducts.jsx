@@ -1,6 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import store from "../redux/store";
-import { setNarrowSidebar, setSideBarShrink } from "../redux/userSlice";
+import {
+  setNarrowSidebar,
+  setSelectedBrands,
+  setSideBarShrink,
+} from "../redux/userSlice";
 import "../../css/all_products.css";
 import { InputSearch } from "../header/Header";
 import Product from "./Product";
@@ -25,8 +29,10 @@ const AllProducts = () => {
     searched_all,
     searched_brand,
     matched_brands,
+    selected_brands,
   } = market;
 
+  console.log(selected_brands);
   // Remove sidebar toggle arrow
   useEffect(() => {
     store.dispatch(setNarrowSidebar(true));
@@ -48,11 +54,10 @@ const AllProducts = () => {
             title="Brand"
             search="brands"
             input="checkbox"
-            searching={searched_brand}
             info={searched_brand ? matched_brands : brands}
           />
           <ProductsLeftSection
-            title="Discount Percentage"
+            title="Discount (%)"
             input="radio"
             info={discount}
           />
@@ -66,12 +71,6 @@ const AllProducts = () => {
             arrange_type === "list" && "products-cont-list"
           }`}
         >
-          {/* {products.map((product) => (
-            <Product
-              key={product.id}
-              product_info={product}
-            />
-          ))} */}
           {products
             .filter((product) =>
               product.item.toLowerCase().includes(searched_all.toLowerCase())
@@ -92,7 +91,9 @@ export default AllProducts;
 export const ProductsCategories = ({ categories }) => {
   return (
     <div className="left-panel-section">
-      <p>Categories</p>
+      <div className="left-panel-title">
+        <p>Categories</p>
+      </div>
       <ul>
         {categories.map((category) => (
           <Link to="/all-products" key={category.id} className="rls">
@@ -109,10 +110,32 @@ export const ProductsCategories = ({ categories }) => {
 export const ProductsLeftSection = ({ info, title, search, input }) => {
   const [searching, setsearching] = useState("");
   const [match, setmatch] = useState([...info]);
+  const [checked, setchecked] = useState([]);
+
+  // Store checked inputs in an array
+  const handleChecked = (e, text) => {
+    if (e.target.checked === true) {
+      setchecked([...checked, text]);
+    } else {
+      const newChecked = checked.filter((check) => check !== text);
+      setchecked(newChecked);
+    }
+  };
+
+  const handleApply = () => {
+    if (search === "brands") {
+      store.dispatch(setSelectedBrands(checked));
+    }
+  };
 
   return (
     <div className="left-panel-section">
-      <p>{title}</p>
+      <div className="left-panel-title">
+        <p>{title}</p>{" "}
+        <button className="styled-button" onClick={handleApply}>
+          Apply
+        </button>
+      </div>
       {search === "brands" && (
         <div className="left-panel-search">
           <InputSearch
@@ -129,7 +152,12 @@ export const ProductsLeftSection = ({ info, title, search, input }) => {
       <div className="left-panel-checklist">
         {match.map((list) => (
           <div key={list.id}>
-            <input id={list.text} type={input} name={list} />
+            <input
+              id={list.text}
+              type={input}
+              name={list}
+              onClick={(e) => handleChecked(e, list.text)}
+            />
             <label htmlFor={list.text}>{list.text}</label>
           </div>
         ))}

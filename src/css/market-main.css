@@ -127,9 +127,8 @@
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  background-color: #34343482;
+  background-color: #20202082;
   font-weight: 700;
-  filter: drop-shadow(0 0 1rem #0000004c);
 }
 .temp1-image-cover p {
   text-shadow: 0 0 2rem black;

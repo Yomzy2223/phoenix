@@ -10,6 +10,7 @@ import {
   setSelectedItem,
   setSearchMatch,
   setMobileSearch,
+  setAllSearched,
 } from "../redux/userSlice";
 import store from "../redux/store";
 import { Link } from "react-router-dom";
@@ -126,9 +127,6 @@ export const useKeyPress = (targetKey) => {
       if (targetKey === key) {
         setkeyPressed(true);
       }
-      // else {
-      //   setkeyPressed(false);
-      // }
     };
     const handleKeyUp = ({ key }) => {
       if (targetKey === key) {
@@ -159,19 +157,43 @@ export const InputSearch = ({
 }) => {
   const [openSearch, setopenSearch] = useState(false);
   const [selectedIndex, setselectedIndex] = useState(-1);
-  const [selectedItem, setselectedItem] = useState("");
   const [openSugg, setopenSugg] = useState(false);
+  const [arrow, setarrow] = useState("");
+  const [initiateSearch, setinitiateSearch] = useState(false);
 
   const searchbox = useRef(null);
 
+  // Get information from store
   const user_data = useSelector((store) => store.user_data);
   const { market } = user_data;
   const { mobile_search } = market;
 
-  // determined the pressed key using useKeyPress custom hook
-  const ArrowUp = useKeyPress("ArrowUp");
-  const ArrowDown = useKeyPress("ArrowDown");
-  const Enter = useKeyPress("Enter");
+  // determine the pressed key
+  var ArrowUp = arrow === "ArrowUp";
+  var ArrowDown = arrow === "ArrowDown";
+  var Enter = arrow === "Enter";
+
+  // Set the pressed key in a state
+  useEffect(() => {
+    const handleKeyDown = ({ key }) => {
+      if (key === "ArrowUp") {
+        setarrow("ArrowUp");
+      } else if (key === "ArrowDown") {
+        setarrow("ArrowDown");
+      } else if (key === "Enter") {
+        setarrow("Enter");
+      }
+    };
+    const handleKeyUp = () => {
+      setarrow("");
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", handleKeyUp);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keydown", handleKeyUp);
+    };
+  }, []);
 
   // Set the index of the item selected with arrow key
   useEffect(() => {
@@ -179,11 +201,9 @@ export const InputSearch = ({
       if (selectedIndex > 0) {
         setselectedIndex(selectedIndex - 1);
       } else {
-        // setselectedIndex(matched_all.length - 1);
         setselectedIndex(match.length - 1);
       }
     } else if (ArrowDown) {
-      // if (selectedIndex < matched_all.length - 1) {
       if (selectedIndex < match.length - 1) {
         setselectedIndex(selectedIndex + 1);
       } else {
@@ -194,16 +214,14 @@ export const InputSearch = ({
     }
   }, [ArrowUp, ArrowDown, Enter]);
 
-  // Set the item selected with arrow key
+  // Update the input value with the item selected with arrow key
   useEffect(() => {
     var item = match[selectedIndex]?.item;
     var text = match[selectedIndex]?.text;
-    setselectedItem(item ? item : text);
-  });
-
-  useEffect(() => {
-    setsearching(selectedItem);
-  }, [selectedItem]);
+    if (selectedIndex >= 0) {
+      setsearching(item ? item : text);
+    }
+  }, [selectedIndex]);
 
   // Input style when suggestion is on
   const style = {
@@ -215,6 +233,7 @@ export const InputSearch = ({
   const handleChange = (searching) => {
     setopenSugg(true);
     setsearching(searching);
+    setinitiateSearch(false);
 
     const matchedItems = items.filter((list) =>
       list.item?.toLowerCase().includes(searching.toLowerCase())
@@ -226,17 +245,40 @@ export const InputSearch = ({
     setmatch(matched);
     setselectedIndex(-1);
   };
+  // const a = () => {
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       resolve(console.log("Thanks for waiting"));
+  //     }, 2000);
+  //   });
+  // };
+  // const b = () => {
+  //   return new Promise((resolve, reject) => {
+  //     resolve(console.log("You are welcome"));
+  //   });
+  // };
+  // a().then((response) => b());
 
   // Update input value
   const updateInputValue = (index) => {
+    console.log(index);
     setopenSugg(false);
     setselectedIndex(index);
-    handleSearch();
+    setTimeout(() => {
+      setinitiateSearch(true);
+    }, 1);
   };
+
+  useEffect(() => {
+    if (initiateSearch === true) {
+      handleSearch();
+    }
+  }, [initiateSearch]);
 
   // The function to handle search
   const handleSearch = () => {
     store.dispatch(setSearchMatch({ type: search, matched: match }));
+    store.dispatch(setAllSearched(searching));
   };
 
   // open search dialog for mobile screen
@@ -252,7 +294,8 @@ export const InputSearch = ({
           <input
             type="text"
             placeholder={placeholder}
-            value={selectedItem ? selectedItem : searching}
+            // value={selectedItem ? selectedItem : searching}
+            value={searching}
             style={desktop && style}
             onChange={(e) => handleChange(e.target.value)}
           />
@@ -284,6 +327,7 @@ export const InputSearch = ({
             match={match}
             searchbox={searchbox}
             desktop={true}
+            setsearching={setsearching}
             selectedIndex={selectedIndex}
             updateInputValue={updateInputValue}
           />
@@ -312,6 +356,7 @@ export const SearchSuggestions = ({
   match,
   searchbox,
   desktop,
+  setsearching,
   selectedIndex,
   updateInputValue,
 }) => {
@@ -468,25 +513,126 @@ export const MobileSearchDialog = ({ open, setOpen, search }) => {
   );
 };
 
-//  Will be needed in taskbar
-// ------------------------------------------
+// const [openSearch, setopenSearch] = useState(false);
+// const [selectedIndex, setselectedIndex] = useState(-1);
+// // const [selectedItem, setselectedItem] = useState("");
+// const [openSugg, setopenSugg] = useState(false);
+// const [arrow, setarrow] = useState("");
 
-// <li>
-//           <HomeRoundedIcon sx={{ fontSize: 20 }} /> Home
-//         </li>
-//         <li>
-//           {" "}
-//           <SignalCellular4BarRoundedIcon sx={{ fontSize: 20 }} /> Airtime
-//         </li>
-//         <li>
-//           {" "}
-//           <ConnectWithoutContactRoundedIcon sx={{ fontSize: 20 }} /> Go Social
-//         </li>
-//         <li>
-//           {" "}
-//           <StoreRoundedIcon sx={{ fontSize: 20 }} /> Market
-//         </li>
-//         <li>
-//           {" "}
-//           <GroupsRoundedIcon sx={{ fontSize: 20 }} /> Users
-//         </li>
+// const searchbox = useRef(null);
+
+// const user_data = useSelector((store) => store.user_data);
+// const { market } = user_data;
+// const { mobile_search } = market;
+
+// // const ArrowUp = useKeyPress("ArrowUp");
+// // const ArrowDown = useKeyPress("ArrowDown");
+// // const Enter = useKeyPress("Enter");
+
+// // determine the pressed key
+// var ArrowUp = arrow === "ArrowUp";
+// var ArrowDown = arrow === "ArrowDown";
+// var Enter = arrow === "Enter";
+
+// // Set the pressed key in a state
+// useEffect(() => {
+//   const handleKeyDown = ({ key }) => {
+//     if (key === "ArrowUp") {
+//       setarrow("ArrowUp");
+//     } else if (key === "ArrowDown") {
+//       setarrow("ArrowDown");
+//     } else if (key === "Enter") {
+//       setarrow("Enter");
+//     }
+//   };
+//   const handleKeyUp = () => {
+//     setarrow("");
+//   };
+//   window.addEventListener("keydown", handleKeyDown);
+//   window.addEventListener("keydown", handleKeyUp);
+//   return () => {
+//     window.removeEventListener("keydown", handleKeyDown);
+//     window.removeEventListener("keydown", handleKeyUp);
+//   };
+// }, []);
+
+// // Set the index of the item selected with arrow key
+// useEffect(() => {
+//   if (ArrowUp) {
+//     if (selectedIndex > 0) {
+//       setselectedIndex(selectedIndex - 1);
+//     } else {
+//       setselectedIndex(match.length - 1);
+//     }
+//   } else if (ArrowDown) {
+//     if (selectedIndex < match.length - 1) {
+//       setselectedIndex(selectedIndex + 1);
+//     } else {
+//       setselectedIndex(0);
+//     }
+//   } else if (Enter) {
+//     updateInputValue(selectedIndex);
+//   }
+// }, [ArrowUp, ArrowDown, Enter]);
+
+// // Set the item selected with arrow key
+// useEffect(() => {
+//   var item = match[selectedIndex]?.item;
+//   var text = match[selectedIndex]?.text;
+//   // setselectedItem(item ? item : text);
+//   setsearching(item ? item : text);
+//   // console.log(item);
+//   // console.log(text);
+//   console.log(selectedIndex);
+// }, [selectedIndex]);
+
+// useEffect(() => {
+//   // setsearching(selectedItem);
+//   // console.log(selectedItem);
+//   console.log(searching);
+// });
+
+// // Input style when suggestion is on
+// const style = {
+//   borderRadius: match.length > 0 && openSugg ? "1rem 1rem 0 0" : "",
+//   boxShadow: match.length > 0 && openSugg ? "0 -0.5rem .5rem #f1f1f1aa" : "",
+// };
+
+// // Handle input value change
+// const handleChange = (searching) => {
+//   setopenSugg(true);
+//   setsearching(searching);
+
+//   const matchedItems = items.filter((list) =>
+//     list.item?.toLowerCase().includes(searching.toLowerCase())
+//   );
+//   const matchedTexts = items.filter((list) =>
+//     list.text?.toLowerCase().includes(searching.toLowerCase())
+//   );
+//   const matched = [...matchedItems, ...matchedTexts];
+//   setmatch(matched);
+//   setselectedIndex(-1);
+// };
+
+// // Update input value
+// const updateInputValue = (index) => {
+//   // setopenSugg(false);
+//   // setselectedIndex(index);
+//   // handleSearch();
+//   // console.log(selectedIndex);
+//   // console.log(searching);
+// };
+
+// // The function to handle search
+// const handleSearch = () => {
+//   console.log(searching);
+//   // store.dispatch(
+//   //   setSearchMatch({ type: search, matched: match, searched: searching })
+//   // );
+// };
+
+// // open search dialog for mobile screen
+// const openSearchDialog = () => {
+//   store.dispatch(setMobileSearch(true));
+//   // setopenSearch(true);
+// };

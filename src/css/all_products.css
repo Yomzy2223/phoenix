@@ -59,10 +59,25 @@
 .left-panel-section:hover .left-panel-checklist::-webkit-scrollbar-thumb {
   background: #dfdfdf;
 }
-.left-panel-section > p {
+.left-panel-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.left-panel-title > p {
   font-size: calc(1rem + 0.1vw);
   font-weight: 700;
   margin: 0.5rem 0;
+}
+.left-panel-title > button {
+  font-size: calc(0.7rem + 0.1vw);
+  height: auto;
+  width: auto;
+  padding: 0.3rem 0.5rem;
+  background-color: #5bda5b;
+  text-transform: capitalize;
+  color: #ebf5ea;
+  border-radius: 0.3rem;
 }
 .left-panel-section label {
   flex: 1;
