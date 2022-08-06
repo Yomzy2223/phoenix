@@ -1,8 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
 import store from "../redux/store";
 import {
+  setCorrectedProducts,
+  setFilteredProducts,
   setNarrowSidebar,
   setSelectedBrands,
+  setSelectedDiscount,
   setSideBarShrink,
 } from "../redux/userSlice";
 import "../../css/all_products.css";
@@ -22,6 +25,7 @@ const AllProducts = () => {
   const { market } = user_data;
   const {
     products,
+    filtered_products,
     arrange_type,
     brands,
     categories,
@@ -30,9 +34,65 @@ const AllProducts = () => {
     searched_brand,
     matched_brands,
     selected_brands,
+    selected_discount,
   } = market;
 
-  console.log(selected_brands);
+  // A function to filter a passed array with a passed text
+  const handleFilter = (products, text, type) => {
+    var filtered = [];
+    if (type === "all") {
+      const filteredA = products.filter((product) =>
+        product.item.toLowerCase().includes(text.toLowerCase())
+      );
+      products.forEach((product) => {
+        const filteredC = product.category.filter((cat) =>
+          cat.toLowerCase().includes(text.toLowerCase())
+        );
+        filtered = [...filtered, ...filteredC];
+      });
+      filtered = [...filtered, ...filteredA];
+    }
+    if (type === "brand" || type === "all") {
+      const filteredB = products.filter((product) =>
+        product.brand.toLowerCase().includes(text.toLowerCase())
+      );
+      filtered = [...filtered, ...filteredB];
+    }
+    if (type === "discount") {
+      const filteredD = products.filter((product) => product.discount >= text);
+      filtered = [...filtered, ...filteredD];
+    }
+    return filtered;
+  };
+
+  // Set filtered products in store (dependent on searched)
+  useEffect(() => {
+    const searchedFiltered = handleFilter(products, searched_all, "all");
+    store.dispatch(setFilteredProducts(searchedFiltered));
+  }, [searched_all]);
+
+  // Set filtered products in store (dependent on selected brands)
+  useEffect(() => {
+    var brandsFiltered = [];
+    if (selected_brands.length > 0) {
+      selected_brands.forEach((brand) => {
+        const brandFiltered = handleFilter(products, brand, "brand");
+        brandsFiltered = [...brandsFiltered, ...brandFiltered];
+      });
+      store.dispatch(setFilteredProducts(brandsFiltered));
+    }
+  }, [selected_brands]);
+
+  // Set filtered products in store (dependent on selected discount)
+  useEffect(() => {
+    const searchedFiltered = handleFilter(
+      products,
+      selected_discount,
+      "discount"
+    );
+    store.dispatch(setFilteredProducts(searchedFiltered));
+  }, [selected_discount]);
+
   // Remove sidebar toggle arrow
   useEffect(() => {
     store.dispatch(setNarrowSidebar(true));
@@ -58,6 +118,7 @@ const AllProducts = () => {
           />
           <ProductsLeftSection
             title="Discount (%)"
+            search="discount"
             input="radio"
             info={discount}
           />
@@ -71,13 +132,16 @@ const AllProducts = () => {
             arrange_type === "list" && "products-cont-list"
           }`}
         >
-          {products
+          {/* {products
             .filter((product) =>
               product.item.toLowerCase().includes(searched_all.toLowerCase())
             )
             .map((product) => (
               <Product key={product.id} product_info={product} />
-            ))}
+            ))} */}
+          {filtered_products.map((product) => (
+            <Product key={product.id} product_info={product} />
+          ))}
         </div>
       </div>
     </div>
@@ -115,16 +179,26 @@ export const ProductsLeftSection = ({ info, title, search, input }) => {
   // Store checked inputs in an array
   const handleChecked = (e, text) => {
     if (e.target.checked === true) {
-      setchecked([...checked, text]);
+      if (input === "checkbox") {
+        setchecked([...checked, text]);
+      } else if (input === "radio") {
+        setchecked(text);
+      }
     } else {
-      const newChecked = checked.filter((check) => check !== text);
-      setchecked(newChecked);
+      if (input === "checkbox") {
+        const newChecked = checked.filter((check) => check !== text);
+        setchecked(newChecked);
+      } else if (input === "radio") {
+        setchecked(text);
+      }
     }
   };
 
   const handleApply = () => {
     if (search === "brands") {
       store.dispatch(setSelectedBrands(checked));
+    } else if (search === "discount") {
+      store.dispatch(setSelectedDiscount(checked));
     }
   };
 
@@ -132,7 +206,11 @@ export const ProductsLeftSection = ({ info, title, search, input }) => {
     <div className="left-panel-section">
       <div className="left-panel-title">
         <p>{title}</p>{" "}
-        <button className="styled-button" onClick={handleApply}>
+        <button
+          className="styled-button"
+          onClick={handleApply}
+          disabled={checked === false || checked.length === 0}
+        >
           Apply
         </button>
       </div>
@@ -158,7 +236,10 @@ export const ProductsLeftSection = ({ info, title, search, input }) => {
               name={list}
               onClick={(e) => handleChecked(e, list.text)}
             />
-            <label htmlFor={list.text}>{list.text}</label>
+            <label htmlFor={list.text}>
+              {list.text}
+              {search === "discount" && "% or more"}
+            </label>
           </div>
         ))}
       </div>

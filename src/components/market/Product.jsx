@@ -15,29 +15,21 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 const Product = ({ product_info }) => {
   var product = { ...product_info };
-  let { item, info, img_src, new_price, old_price, ratings } = product;
-  const [ratingSum, setratingSum] = useState(0);
+  let {
+    item,
+    info,
+    img_src,
+    new_price,
+    old_price,
+    ratings,
+    av_rating,
+    discount,
+  } = product;
 
-  // Calculate the discount in %
-  const price_cut = old_price - new_price;
-  const discount = (price_cut / old_price) * 100;
-
-  // User data information from the store
+  // // User data information from the store
   const user_data = useSelector((store) => store.user_data);
   const { market, cart } = user_data;
   const { arrange_type } = market;
-
-  // Sum up all ratings in the ratings array
-  useEffect(() => {
-    var rating_sum = 0;
-    ratings.forEach((rating) => {
-      rating_sum += rating;
-    });
-    setratingSum(rating_sum);
-  });
-
-  // Calculate the average of the summed ratings
-  const average_rating = ratingSum / ratings.length;
 
   // Get naira format of the prices
   const new_price_NF = new Intl.NumberFormat("en-US", {
@@ -90,9 +82,9 @@ const Product = ({ product_info }) => {
           <span>{info}</span>
         </div>
         <p className="product-price-new">{`${new_price_NF}`}</p>
-        {old_price && (
+        {discount > 0 && old_price && (
           <div className="product-price-old">
-            <p>{old_price_NF}</p> <span>{`-${Math.round(discount)}%`}</span>
+            <p>{old_price_NF}</p> <span>{-discount}%</span>
           </div>
         )}
         <div className="product-rating">
@@ -107,7 +99,7 @@ const Product = ({ product_info }) => {
                 <StarIcon sx={{ fontSize: 18 }} />
               </div>
             }
-            initialRating={average_rating}
+            initialRating={av_rating}
             readonly={true}
           />
           <span className="product-rating-total">{`(${ratings.length})`}</span>

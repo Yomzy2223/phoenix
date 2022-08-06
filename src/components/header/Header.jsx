@@ -11,6 +11,7 @@ import {
   setSearchMatch,
   setMobileSearch,
   setAllSearched,
+  setCorrectedProducts,
 } from "../redux/userSlice";
 import store from "../redux/store";
 import { Link } from "react-router-dom";
@@ -36,6 +37,37 @@ function Header() {
   const [searching, setsearching] = useState("");
   const [match, setmatch] = useState([]);
 
+  // Login status check and market information
+  const user_data = useSelector((store) => store.user_data);
+  const { loginstatus, market } = user_data;
+  const { products, brands, categories } = market;
+
+  const all = [...products, ...brands, ...categories];
+
+  // Calculate and store the value of the rating and the discount
+  useEffect(() => {
+    const storeProducts = [...products];
+    const correctedProducts = storeProducts.map((product) => {
+      const productCopy = { ...product };
+
+      // Calculate the average rating
+      const total = (sum, num) => sum + num;
+      const totalRating = productCopy.ratings.reduce(total);
+      productCopy.av_rating = (
+        totalRating / productCopy.ratings.length
+      ).toFixed(2);
+
+      // Calculate the discount (%) from old and new price
+      const price_cut = productCopy.old_price - productCopy.new_price;
+      productCopy.discount = Math.round(
+        (price_cut / productCopy.old_price) * 100
+      );
+
+      return (product = productCopy);
+    });
+    store.dispatch(setCorrectedProducts(correctedProducts));
+  }, []);
+
   const handleMenuClick = () => {
     store.dispatch(setSideBarShrink(false));
     store.dispatch(setSidebarWidth("16.8rem"));
@@ -56,12 +88,6 @@ function Header() {
     }
   };
 
-  // Login status check and market information
-  const user_data = useSelector((store) => store.user_data);
-  const { loginstatus, market } = user_data;
-  const { products, brands, categories } = market;
-
-  const all = [...products, ...brands, ...categories];
   return (
     <div id="header" className="header-main">
       <div className="header-main-content">

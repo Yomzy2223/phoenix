@@ -95,6 +95,7 @@ const UserData = createSlice({
       arrange_type: "",
       mobile_search: false,
       products: All_Products,
+      filtered_products: All_Products,
       brands: Brands,
       categories: Categories,
       discount: Discount,
@@ -213,10 +214,10 @@ const UserData = createSlice({
       state.market.selected_brands = action.payload;
     },
     setSelectedCategory: (state, action) => {
-      state.selected_category = action.payload;
+      state.market.selected_category = action.payload;
     },
     setSelectedDiscount: (state, action) => {
-      state.selected_discount = action.payload;
+      state.market.selected_discount = action.payload;
     },
     setSearchMatch: (state, action) => {
       const { type, matched } = action.payload;
@@ -228,6 +229,12 @@ const UserData = createSlice({
     },
     setMobileSearch: (state, action) => {
       state.market.open_search = action.payload;
+    },
+    setCorrectedProducts: (state, action) => {
+      state.market.products = action.payload;
+    },
+    setFilteredProducts: (state, action) => {
+      state.market.filtered_products = action.payload;
     },
   },
 });
@@ -246,4 +253,6 @@ export const {
   setSelectedDiscount,
   setSearchMatch,
   setMobileSearch,
+  setCorrectedProducts,
+  setFilteredProducts,
 } = UserData.actions;
