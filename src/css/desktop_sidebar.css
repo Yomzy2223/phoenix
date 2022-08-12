@@ -1,8 +1,10 @@
 .desktop-sidebar {
-  position: relative;
-  overflow-x: visible;
+  /* position: relative; */
+  position: sticky;
+  top: 0;
+  /* overflow-x: visible; */
   width: var(--sidebar-width);
-  transition: 0.3s width ease;
+  transition: 0.2s width ease;
   height: 100%;
 }
 .sidebar-toggle-icon {

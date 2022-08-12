@@ -46,9 +46,10 @@ function App() {
               <Route path="/more" element={<MorePage />}></Route>
             </Routes>
           </div>
+          <Footer />
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
       <MobileNavbar />
     </div>
   );

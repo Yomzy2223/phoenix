@@ -31,10 +31,12 @@
   position: sticky;
   top: 0;
   flex: 1;
+  height: inherit;
   max-height: 100vh;
   min-height: 27rem;
   max-width: max-content;
   transition: 3s width ease;
+  background-color: #ffffff;
   z-index: 2;
 }
 /* .main-cont1-item1::-webkit-scrollbar {

@@ -4,8 +4,7 @@
   align-items: flex-start;
   justify-content: flex-start;
   gap: 1rem;
-  height: 100%;
-  /* min-height: 100vh; */
+  /* height: 100%; */
   width: 100%;
   background-color: white;
   z-index: 2;
@@ -23,7 +22,8 @@
   flex: 1;
   flex-flow: column nowrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  /* justify-content: space-between; */
   width: inherit;
 }
 .account-sidebar__body {
@@ -33,7 +33,7 @@
   justify-content: flex-start;
   gap: 3%;
   align-items: center;
-  height: 80%;
+  /* height: 80%; */
   width: inherit;
   /* background-color: bisque; */
 }
@@ -58,7 +58,7 @@
   /* gap: 1rem; */
   margin-bottom: 1rem;
   /* background-color: blueviolet; */
-  height: 40%;
+  /* height: 40%; */
   width: inherit;
 }
 
@@ -75,7 +75,6 @@
 .account-holder-main {
   display: flex;
   flex-flow: column nowrap;
-  justify-content: fls;
   gap: 0.3rem;
 }
 .account-name-initials {
@@ -192,7 +191,7 @@
 }
 .sidebar-temp-full:focus {
   border-left: 0.5rem solid #00448c;
-  background-color: rgba(141, 213, 255, 0.074);
+  background-color: #8dd5ff13;
 }
 .sidebar-temp-full:focus .sidebar-temp {
   color: #00448c;
