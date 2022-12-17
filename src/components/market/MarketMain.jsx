@@ -131,12 +131,12 @@ export const MarketTemp1Title = ({ title, sub_title }) => {
   return (
     <div className="temp1-title">
       <p>
-        <Link to="/all-products" className="rls" tabIndex={0}>
+        <Link to="/market/all-products" className="rls" tabIndex={0}>
           {title}
         </Link>
       </p>
       <div className="div-y" style={{ height: "calc(1.1rem + .2vw)" }} />
-      <Link to="/all-products" className="rls" tabIndex={0}>
+      <Link to="/market/all-products" className="rls" tabIndex={0}>
         <p className="temp1-title-sub">
           {sub_title} <ArrowForwardIcon />
         </p>
@@ -214,7 +214,7 @@ export const MarketTemp1Scroll = ({ container, info, cover }) => {
     <div ref={container} className="temp1-images">
       {info.map((infodata) => (
         <div key={infodata.id} className="temp1-image-info">
-          <Link to="/all-products" className="rls" tabIndex={0}>
+          <Link to="/market/all-products" className="rls" tabIndex={0}>
             <div
               className="temp1-image"
               style={{ borderRadius: infodata.new_price ? "1rem" : "100%" }}
@@ -227,7 +227,7 @@ export const MarketTemp1Scroll = ({ container, info, cover }) => {
               <img src={infodata.img_src} alt="" />
             </div>
           </Link>
-          <Link to="/all-products" className="rls" tabIndex={0}>
+          <Link to="/market/all-products" className="rls" tabIndex={0}>
             <div className="temp1-info">
               {!cover && (
                 <p

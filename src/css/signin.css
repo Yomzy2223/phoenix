@@ -1,6 +1,8 @@
 .sign-in {
   display: flex;
   flex-flow: column nowrap;
+  background-color: #d3d3d365;
+  flex: 1;
   gap: 20%;
 }
 .sign-in__body {

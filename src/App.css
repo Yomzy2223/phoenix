@@ -33,7 +33,6 @@
   flex: 1;
   height: inherit;
   max-height: 100vh;
-  min-height: 27rem;
   max-width: max-content;
   transition: 3s width ease;
   background-color: #ffffff;
@@ -90,13 +89,7 @@
   flex-flow: column nowrap;
   align-items: center;
   cursor: pointer;
-}
-.mobile-nb:hover {
-  color: var(--mainblue);
-  filter: opacity(0.8);
-}
-.m-blue {
-  color: var(--mainblue);
+  color: var(--mainblue) !important;
 }
 .styled-button {
   display: flex;
@@ -204,6 +197,7 @@
 .main-container {
   display: flex;
   flex-flow: row nowrap;
+  flex: 1;
   max-width: 100vw;
 }
 .hov-op:hover {

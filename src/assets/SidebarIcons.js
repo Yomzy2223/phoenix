@@ -53,7 +53,7 @@ export const Account_Sidebar_info = [
     id: "dashboard",
     text: "Dashboard",
     icon: <HomeRoundedIcon />,
-    link: "/dashboard",
+    link: "/",
   },
   { id: "social", text: "Go Social", icon: <ThumbUpIcon />, link: "/social" },
   { id: "swap", text: "Swap", icon: <SwapHorizRoundedIcon />, link: "/swap" },

@@ -10,7 +10,7 @@ function SocialPage() {
   var sidebar_right = useSelector((state) => state.dummy_data.sidebar_right);
 
   return (
-    <div className="dashboard-page">
+    <div className="main-container">
       {/* <div className="desktop-sidebar">
         <AccountSideBar />
       </div>

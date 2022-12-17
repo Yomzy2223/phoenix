@@ -14,7 +14,6 @@ function SignUp() {
 
   return (
     <div className="sign-in">
-      <Header showlist={true} />
       <MobileSideBar
         sidebar_right={sidebar_right}
         sidebar_width={sidebar_width}

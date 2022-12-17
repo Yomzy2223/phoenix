@@ -14,7 +14,6 @@ const DummyData = createSlice({
     sidebar_back_arrow: false,
     password_visible: false,
     sidebar_is_shrink: false,
-    nav_clicked: "dashboard",
     narrow_sidebar: false,
     header_icon_clicked: "",
   },
@@ -51,9 +50,6 @@ const DummyData = createSlice({
     setSideBarShrink: (state, action) => {
       state.sidebar_is_shrink = action.payload;
     },
-    setNavClicked: (state, action) => {
-      state.nav_clicked = action.payload;
-    },
     setNarrowSidebar: (state, action) => {
       state.narrow_sidebar = action.payload;
       // state.sidebar_is_shrink = action.payload;
@@ -70,7 +66,6 @@ export const {
   setSidebarBackArrow,
   setPasswordVis,
   setSideBarShrink,
-  setNavClicked,
   setNarrowSidebar,
   setHeaderIconClicked,
 } = DummyData.actions;
@@ -166,45 +161,45 @@ const UserData = createSlice({
     // A function to handle products sort
     handleSort: (state, action) => {
       const { sort_id, sort_type } = action.payload;
-      const { products } = state.market;
+      const { filtered_products } = state.market;
       state.market.sortType = sort_type;
       state.market.sortId = sort_id;
       // Sort by popularity
       if (sort_id === 1) {
-        const Products_Sorted = products.sort(
+        const Products_Sorted = filtered_products.sort(
           (b, a) => a.total_sold - b.total_sold
         );
-        state.market.products = Products_Sorted;
+        state.market.filtered_products = Products_Sorted;
       }
       // Sort by newest arrivals
       else if (sort_id === 2) {
-        const Products_Sorted = products.sort((b, a) => a.id - b.id);
-        state.market.products = Products_Sorted;
+        const Products_Sorted = filtered_products.sort((b, a) => a.id - b.id);
+        state.market.filtered_products = Products_Sorted;
       }
       // Sort by price: low to high
       else if (sort_id === 3) {
-        const Products_Sorted = products.sort(
+        const Products_Sorted = filtered_products.sort(
           (b, a) => b.new_price - a.new_price
         );
-        state.market.products = Products_Sorted;
+        state.market.filtered_products = Products_Sorted;
       }
       // Sort by price: high to low
       else if (sort_id === 4) {
-        const Products_Sorted = products.sort(
+        const Products_Sorted = filtered_products.sort(
           (b, a) => a.new_price - b.new_price
         );
-        state.market.products = Products_Sorted;
+        state.market.filtered_products = Products_Sorted;
       }
       // Sort by rating
       else {
-        const Products_Sorted = products.sort((b, a) => {
+        const Products_Sorted = filtered_products.sort((b, a) => {
           const b_rating_sum = b.ratings.reduce((sum, value) => sum + value, 0);
           const a_rating_sum = a.ratings.reduce((sum, value) => sum + value, 0);
           const b_rating_av = b_rating_sum / b.ratings.length;
           const a_rating_av = a_rating_sum / a.ratings.length;
           return a_rating_av - b_rating_av;
         });
-        state.market.products = Products_Sorted;
+        state.market.filtered_products = Products_Sorted;
       }
     },
     setAllSearched: (state, action) => {
@@ -232,6 +227,7 @@ const UserData = createSlice({
     },
     setCorrectedProducts: (state, action) => {
       state.market.products = action.payload;
+      state.market.filtered_products = action.payload;
     },
     setFilteredProducts: (state, action) => {
       state.market.filtered_products = action.payload;

@@ -14,7 +14,7 @@ import {
   setCorrectedProducts,
 } from "../redux/userSlice";
 import store from "../redux/store";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import All_icons from "../../assets/All_Icons";
 import { ApartmentIcon } from "../../assets/SidebarIcons";
 import AccountSummary from "./AccountSummary";
@@ -143,32 +143,6 @@ export function CompanyName({ color, noicon }) {
   );
 }
 
-//___________________________________________________________
-// A custom hook to confirm if the pressed key is the passed for check
-export const useKeyPress = (targetKey) => {
-  const [keyPressed, setkeyPressed] = useState(false);
-
-  useEffect(() => {
-    const handleKeyDown = ({ key }) => {
-      if (targetKey === key) {
-        setkeyPressed(true);
-      }
-    };
-    const handleKeyUp = ({ key }) => {
-      if (targetKey === key) {
-        setkeyPressed(false);
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("keydown", handleKeyUp);
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("keydown", handleKeyUp);
-    };
-  }, [targetKey]);
-  return keyPressed;
-};
-
 // __________________________________________________________________
 // Search input component for both desktop and mobile
 export const InputSearch = ({
@@ -186,13 +160,20 @@ export const InputSearch = ({
   const [openSugg, setopenSugg] = useState(false);
   const [arrow, setarrow] = useState("");
   const [initiateSearch, setinitiateSearch] = useState(false);
+  const [searchParams, setsearchParams] = useSearchParams();
+  // const [searchParamsValue, setsearchParamsValue] = useState(
+  //   searchParams.get("searching")
+  // );
 
   const searchbox = useRef(null);
 
+  const navigate = useNavigate();
   // Get information from store
   const user_data = useSelector((store) => store.user_data);
   const { market } = user_data;
   const { mobile_search } = market;
+
+  const searchParamsValue = searchParams.get("searching");
 
   // determine the pressed key
   var ArrowUp = arrow === "ArrowUp";
@@ -287,7 +268,6 @@ export const InputSearch = ({
 
   // Update input value
   const updateInputValue = (index) => {
-    console.log(index);
     setopenSugg(false);
     setselectedIndex(index);
     setTimeout(() => {
@@ -297,14 +277,24 @@ export const InputSearch = ({
 
   useEffect(() => {
     if (initiateSearch === true) {
-      handleSearch();
+      setsearchParams(searching.length !== 0 ? { searching } : {});
+      store.dispatch(setSearchMatch({ type: search, matched: match }));
+      // setinitiateSearch(false);
+      // store.dispatch(setAllSearched(searching));
+      // handleSearch();
+      console.log("Search is true");
     }
   }, [initiateSearch]);
 
+  useEffect(() => {
+    if (searchParamsValue !== null) {
+      store.dispatch(setAllSearched(searchParamsValue));
+    }
+  }, [searchParamsValue]);
+
   // The function to handle search
   const handleSearch = () => {
-    store.dispatch(setSearchMatch({ type: search, matched: match }));
-    store.dispatch(setAllSearched(searching));
+    setinitiateSearch(true);
   };
 
   // open search dialog for mobile screen
@@ -320,8 +310,11 @@ export const InputSearch = ({
           <input
             type="text"
             placeholder={placeholder}
-            // value={selectedItem ? selectedItem : searching}
-            value={searching}
+            value={
+              openSugg === false && searchParamsValue !== null
+                ? searchParamsValue
+                : searching
+            }
             style={desktop && style}
             onChange={(e) => handleChange(e.target.value)}
           />

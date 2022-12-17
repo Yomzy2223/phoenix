@@ -32,6 +32,7 @@
   flex-flow: column nowrap;
   justify-content: flex-start;
   gap: 3%;
+  gap: 8px;
   align-items: center;
   /* height: 80%; */
   width: inherit;
@@ -184,17 +185,7 @@
   justify-content: center;
   width: 100%;
   font-weight: 500;
-}
-
-.sidebar-temp-full:hover .sidebar-temp {
-  color: #00448c;
-}
-.sidebar-temp-full:focus {
-  border-left: 0.5rem solid #00448c;
-  background-color: #8dd5ff13;
-}
-.sidebar-temp-full:focus .sidebar-temp {
-  color: #00448c;
+  padding-block: 5px;
 }
 .sidebar-temp {
   display: flex;
@@ -207,7 +198,6 @@
   display: flex;
   align-items: center;
   white-space: nowrap;
-  transition: 0.3s all ease;
 }
 .sidebar-temp-active {
   border-left: 0.5rem solid #00448c;
@@ -223,5 +213,10 @@
   text-decoration: none;
   width: 100%;
   transition: 0.3s all ease;
+}
+.sidebar-temp--active {
+  border-left: 0.5rem solid #00448c;
+  background-color: #8dd5ff13;
+  color: #00448c;
 }
 /* Sidebar template component styles - end */

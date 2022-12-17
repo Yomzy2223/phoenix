@@ -14,36 +14,37 @@ function SignIn() {
     (state) => state.dummy_data.password_visible
   );
   return (
-    <div className="sign-in">
-      <Header showlist={true} />
-      <MobileSideBar
-        sidebar_right={sidebar_right}
-        sidebar_width={sidebar_width}
-      />
-      <div className="sign-in__body">
-        <div className="sign-in__main">
-          <div className="sign-in__main-header">
-            <p className="sign-in__title">Sign into your account</p>
-            <p className="sign-in__sub-title">
-              Don't have an account?{" "}
-              <Link className="remove-style small-blue" to="/sign_up">
-                Create one
+    <div className="main-container">
+      <div className="sign-in">
+        <MobileSideBar
+          sidebar_right={sidebar_right}
+          sidebar_width={sidebar_width}
+        />
+        <div className="sign-in__body">
+          <div className="sign-in__main">
+            <div className="sign-in__main-header">
+              <p className="sign-in__title">Sign into your account</p>
+              <p className="sign-in__sub-title">
+                Don't have an account?{" "}
+                <Link className="remove-style small-blue" to="/sign_up">
+                  Create one
+                </Link>
+              </p>
+            </div>
+            <div className="sign-in__main-body">
+              <SignFields type="email" placeholder="email" />
+              <SignFields
+                type={passwordVisible ? "text" : "password"}
+                placeholder="password"
+                field="password"
+                subfield="Forgot your password"
+              />
+              <Link to="/" className="remove-style">
+                <button type="submit" className="styled-button">
+                  Sign in
+                </button>
               </Link>
-            </p>
-          </div>
-          <div className="sign-in__main-body">
-            <SignFields type="email" placeholder="email" />
-            <SignFields
-              type={passwordVisible ? "text" : "password"}
-              placeholder="password"
-              field="password"
-              subfield="Forgot your password"
-            />
-            <Link to="/" className="remove-style">
-              <button type="submit" className="styled-button">
-                Sign in
-              </button>
-            </Link>
+            </div>
           </div>
         </div>
       </div>

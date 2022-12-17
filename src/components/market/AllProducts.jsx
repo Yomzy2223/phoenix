@@ -11,7 +11,7 @@ import {
 import "../../css/all_products.css";
 import { InputSearch } from "../header/Header";
 import Product from "./Product";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import ViewComfyIcon from "@mui/icons-material/ViewComfy";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
@@ -19,6 +19,7 @@ import { handleSort, setArrange } from "../redux/userSlice";
 import { useSelector } from "react-redux";
 
 const AllProducts = () => {
+  const [] = useSearchParams();
   const products_cont = useRef(null);
 
   const user_data = useSelector((store) => store.user_data);
@@ -67,8 +68,10 @@ const AllProducts = () => {
 
   // Set filtered products in store (dependent on searched)
   useEffect(() => {
-    const searchedFiltered = handleFilter(products, searched_all, "all");
-    store.dispatch(setFilteredProducts(searchedFiltered));
+    if (searched_all.length > 0) {
+      const searchedFiltered = handleFilter(products, searched_all, "all");
+      store.dispatch(setFilteredProducts(searchedFiltered));
+    }
   }, [searched_all]);
 
   // Set filtered products in store (dependent on selected brands)
@@ -78,19 +81,23 @@ const AllProducts = () => {
       selected_brands.forEach((brand) => {
         const brandFiltered = handleFilter(products, brand, "brand");
         brandsFiltered = [...brandsFiltered, ...brandFiltered];
+        console.log(brandFiltered);
       });
       store.dispatch(setFilteredProducts(brandsFiltered));
+    } else {
+      store.dispatch(setFilteredProducts(products));
     }
   }, [selected_brands]);
-
   // Set filtered products in store (dependent on selected discount)
   useEffect(() => {
-    const searchedFiltered = handleFilter(
-      products,
-      selected_discount,
-      "discount"
-    );
-    store.dispatch(setFilteredProducts(searchedFiltered));
+    if (selected_discount.length > 0) {
+      const searchedFiltered = handleFilter(
+        products,
+        selected_discount,
+        "discount"
+      );
+      store.dispatch(setFilteredProducts(searchedFiltered));
+    }
   }, [selected_discount]);
 
   // Remove sidebar toggle arrow
@@ -132,13 +139,6 @@ const AllProducts = () => {
             arrange_type === "list" && "products-cont-list"
           }`}
         >
-          {/* {products
-            .filter((product) =>
-              product.item.toLowerCase().includes(searched_all.toLowerCase())
-            )
-            .map((product) => (
-              <Product key={product.id} product_info={product} />
-            ))} */}
           {filtered_products.map((product) => (
             <Product key={product.id} product_info={product} />
           ))}
@@ -160,7 +160,7 @@ export const ProductsCategories = ({ categories }) => {
       </div>
       <ul>
         {categories.map((category) => (
-          <Link to="/all-products" key={category.id} className="rls">
+          <Link to="/market/all-products" key={category.id} className="rls">
             <li>{category.text}</li>
           </Link>
         ))}
@@ -209,7 +209,7 @@ export const ProductsLeftSection = ({ info, title, search, input }) => {
         <button
           className="styled-button"
           onClick={handleApply}
-          disabled={checked === false || checked.length === 0}
+          // disabled={checked === false || checked.length === 0}
         >
           Apply
         </button>
@@ -257,10 +257,10 @@ export const RightPanelHeader = ({ setsortId, products_cont }) => {
 
   const user_data = useSelector((store) => store.user_data);
   const { market } = user_data;
-  const { products, sortType, arrange_type } = market;
+  const { products, filtered_products, sortType, arrange_type } = market;
 
   // Get total products number
-  const products_found = products.length;
+  const products_found = filtered_products.length;
 
   // Arrange products - list or grid
   const handleArrange = (type) => {

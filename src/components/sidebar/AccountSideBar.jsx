@@ -7,19 +7,17 @@ import {
 } from "../../assets/SidebarIcons";
 import "../../css/account_sidebar.css";
 import store from "../redux/store";
-import { setNavClicked, setSidebarBackArrow } from "../redux/userSlice";
+import { setSidebarBackArrow } from "../redux/userSlice";
 import { useSelector } from "react-redux";
 import DesktopSideBar from "./DesktopSideBar";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function AccountSideBar() {
   const closeSideBar = (id) => {
     store.dispatch(setSidebarBackArrow(true));
-    store.dispatch(setNavClicked(id));
   };
 
   // Sidebar information from store
-  const navClicked = useSelector((store) => store.dummy_data.nav_clicked);
   const shrink = useSelector((store) => store.dummy_data.sidebar_is_shrink);
 
   // User information from store
@@ -43,7 +41,6 @@ function AccountSideBar() {
                 shrink={shrink}
                 link={info.link}
                 closeSideBar={closeSideBar}
-                navClicked={navClicked}
               />
             ))}
           </div>
@@ -54,9 +51,8 @@ function AccountSideBar() {
                 text={"Manage account"}
                 icon={<ManageAccountsIcon />}
                 shrink={shrink}
-                link="/"
+                link="/account"
                 closeSideBar={closeSideBar}
-                navClicked={navClicked}
               />
             )}
             {loginstatus ? (
@@ -65,9 +61,8 @@ function AccountSideBar() {
                 text={!shrink && "Logout"}
                 icon={<LogoutIcon />}
                 shrink={shrink}
-                link="/"
+                link="/sign_in"
                 closeSideBar={closeSideBar}
-                navClicked={navClicked}
               />
             ) : (
               <SideBarTemp
@@ -77,7 +72,6 @@ function AccountSideBar() {
                 shrink={shrink}
                 link="/sign_in"
                 closeSideBar={closeSideBar}
-                navClicked={navClicked}
               />
             )}
           </div>
@@ -153,31 +147,25 @@ export function JoinNow() {
 
 // ______________________________________________________________
 // Sidebar list template
-export function SideBarTemp({
-  id,
-  text,
-  icon,
-  shrink,
-  link,
-  closeSideBar,
-  navClicked,
-}) {
+export function SideBarTemp({ id, text, icon, shrink, link, closeSideBar }) {
   const sideBarClose = async () => {
     document.body.classList.remove("sidebar-modal-on");
     await Promise.resolve(closeSideBar(id));
   };
 
   return (
-    <Link
+    <NavLink
       to={link}
       id="remove-link-style"
       className="sidebar-temp-full"
       tabIndex={0}
       onClick={sideBarClose}
-      style={{
-        borderLeft: navClicked === id && "0.5rem solid #00448c",
-        backgroundColor: navClicked === id && "#8dd5ff13",
-        color: navClicked === id && "#00448c",
+      style={({ isActive }) => {
+        return {
+          borderLeft: isActive ? "0.5rem solid #00448c" : "",
+          backgroundColor: isActive ? "#8dd5ff13" : "",
+          color: isActive ? "#00448c" : "",
+        };
       }}
     >
       <div className="sidebar-temp">
@@ -186,6 +174,6 @@ export function SideBarTemp({
           {text}
         </span>
       </div>
-    </Link>
+    </NavLink>
   );
 }
